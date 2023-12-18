@@ -1,0 +1,96 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'room/css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<main>
+    <div class="banner position-relative">
+        <div class="container banner-content d-flex justify-content-center">
+            <div class="inner d-flex gap-5 align-items-center justify-content-center">
+                <div class="check-in">
+                    <div class="check-in-icon">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        CHECK-IN
+                    </div>
+                    <div class="check-in-date">
+                        <input type="date" name="checkin" />
+                    </div>
+                </div>
+                <div class="separate"></div>
+                <div class="check-out">
+                    <div class="check-out-icon">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        CHECK-OUT
+                    </div>
+                    <div class="check-in-date">
+                        <input type="date" name="checkout" />
+                    </div>
+                </div>
+                <div class="separate"></div>
+                <div class="adults">
+                    <div class="adults-icon">
+                        <i class="fa-regular fa-user"></i>
+                        Adults
+                    </div>
+                    <div class="adults-date">
+                        <input type="number" name="adults" />
+                    </div>
+                </div>
+                <div class="separate"></div>
+                <div class="children">
+                    <div class="children-icon">
+                        <i class="fa-solid fa-child"></i>
+                        Children
+                    </div>
+                    <div class="children-date">
+                        <input type="number" name="children" />
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 100px;">
+        <div class="blog">
+            <div class="row">
+                <div class="col-6 d-flex justify-content-center">
+                    <div class="blog-image"><img  src="{% static 'room/images/blog.jpg' %}" alt="Blog"></div>
+                </div>
+                <div class="col-6">
+                    <div class="blog-content">
+                        <h3 class="blog-title">We strived only for the best</h3>
+                        <div class="blog-separate"></div>
+                        <p class="blog-content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="services">
+            <h3 class="service-title">See our services</h3>
+            <p class="service-des">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+            <div class="row">
+                <div class="col-6">
+                    <div class="list-service">
+                        <div class="service-item">
+                            <div class="service-logo">
+                                <i class="fa-solid fa-utensils"></i>
+                            </div>
+                            Quality food
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
