@@ -1,0 +1,17 @@
+{% extends 'manager/base.html' %}
+
+{% block content %}
+
+<main>
+    <div class="container">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <div>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+{% endblock %}

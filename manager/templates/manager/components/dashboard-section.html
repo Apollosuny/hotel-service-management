@@ -1,0 +1,84 @@
+<main>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <div class="container">
+            <form class="d-flex my-2 my-lg-0">
+                <input
+                    class="form-control me-sm-2"
+                    type="text"
+                    placeholder="Search"
+                />
+                <button
+                    class="btn btn-outline-success my-2 my-sm-0"
+                    type="submit"
+                >
+                    Search
+                </button>
+            </form>
+            <div class="notification d-flex gap-3">
+                <div class="noti">
+                    <i class="fa-regular fa-bell" style="width: 20px; height: 20px;"></i>
+                </div>
+                <div class="mail">
+                    <i class="fa-regular fa-envelope" style="width: 20px; height: 20px;"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section class="content">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-12 d-flex gap-3">
+                    <div class="statistic-card">
+                        <div>
+                            <i class="fa-solid fa-chart-simple"></i>
+                        </div>
+                        <div class="statistic-content">
+                            <div class="statistic-number">75</div>
+                            <h4>Total Booking</h4>
+                        </div>
+                    </div>
+                    <div class="statistic-card">
+                        <div>
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div class="statistic-content">
+                            <div class="statistic-number">12,200</div>
+                            <h4>Total Customers</h4>
+                        </div>
+                    </div>
+                    <div class="statistic-card">
+                        <div>
+                            <i class="fa-solid fa-chart-simple"></i>
+                        </div>
+                        <div class="statistic-content">
+                            <div class="statistic-number">$58,947</div>
+                            <h4>Total Revenue</h4>
+                        </div>
+                    </div>
+                    <div class="statistic-card">
+                        <div>
+                            <i class="fa-solid fa-chart-simple"></i>
+                        </div>
+                        <div class="statistic-content">
+                            <div class="statistic-number">$58,947</div>
+                            <h4>Total Revenue</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 d-flex gap-3">
+                    <a href="{% url 'room' %}" class="btn btn-primary">
+                        Create room
+                    </a>
+                    <a href="{% url 'room-type' %}" class="btn btn-primary">
+                        Create room type
+                    </a>
+                    <a href="{% url 'service' %}" class="btn btn-primary">
+                        Create service
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

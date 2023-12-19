@@ -33,7 +33,9 @@ INSTALLED_APPS = [
     'room.apps.RoomConfig',
     'booking.apps.BookingConfig',
     'manager.apps.ManagerConfig',
-    'fontawesomefree'
+    'fontawesomefree',
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +139,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom authentication
 AUTH_USER_MODEL = 'user.User'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = 'bootstrap5'

@@ -39,8 +39,8 @@ class Service(models.Model):
     price = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    status = models.BooleanField()
+    status = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.name + ' - ' + self.price
+        return self.name + ' - ' + str(self.price)
 
