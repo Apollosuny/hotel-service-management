@@ -1,0 +1,44 @@
+{% extends 'manager/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <div class="menu">
+                <div class="logo">
+                    <!-- <img src="" alt=""> -->
+                    <a href="/">Group 2</a>
+                </div>
+                <div class="menu-list">
+                    <div class="item">
+                        Dashboard
+                    </div>
+                    <div class="item">
+                        Bookings
+                    </div>
+                    <div class="item">
+                        Customers
+                    </div>
+                    <div class="item">
+                        Rooms
+                    </div>
+                    <a href="{% url 'services' %}" class="item">
+                        Services
+                    </a>
+                    <div class="item">
+                        Settings
+                    </div>
+                </div>
+            </div>
+            <div class="logout">
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+        <div class="col-9">
+            {% include 'manager/components/dashboard-section.html' %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
