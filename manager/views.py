@@ -6,6 +6,9 @@ from room.models import *
 def dashboard(request):
     return render(request, 'manager/components/dashboard-section.html')
 
+def all_room_type(request):
+    return render(request, 'manager/pages/room-type/all-room-type.html')
+
 def room_type(request):
     if request.method == 'POST':
         print(request.POST['name'])
@@ -25,6 +28,9 @@ def room_type(request):
     else:
         form = RoomTypeForm()
     return render(request, 'manager/pages/room-type.html', { 'form': form })
+
+def all_room(request):
+    return render(request, 'manager/pages/rooms/rooms.html')
 
 def room(request):
     if request.method == 'POST':
