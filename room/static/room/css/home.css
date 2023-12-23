@@ -53,3 +53,45 @@
 .service-item {
     
 }
+
+.service-img {
+    width: 100%;
+    height: 500px;
+}
+
+.service-img > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+/* Rooms */
+.wrapper-room {
+
+}
+
+.wrapper-room > .wrapper-room-img {
+    width: 100%;
+    height: 275px;
+}
+
+.wrapper-room > .wrapper-room-img > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.room-content {
+
+}
+
+.room-content > .room-price {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.room-content > .room-price > span {
+    font-size: 24px;
+    font-weight: 400;
+}

@@ -24,7 +24,7 @@ def search(linklist, roomID = None,type = None):
         # Loop till current not equal to None
         ArrRoom = []
         while current != None:
-            if current.data.roomID == roomID or current.data.type == type :
+            if current.data.room_id == roomID or current.data.type == type :
                 # Data found
                 ArrRoom.append(current.data)
             current = current.next

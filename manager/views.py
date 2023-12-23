@@ -4,7 +4,7 @@ from room.models import *
 
 # Create your views here.
 def dashboard(request):
-    return render(request, 'manager/pages/dashboard.html')
+    return render(request, 'manager/components/dashboard-section.html')
 
 def room_type(request):
     if request.method == 'POST':
@@ -46,3 +46,6 @@ def service(request):
 def allServices(request):
     services = Service.objects.all()
     return render(request, 'manager/pages/services.html', { 'services': services })
+
+def about(request):
+    return render(request, 'manager/pages/about.html')

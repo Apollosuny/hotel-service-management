@@ -1,0 +1,147 @@
+{% extends 'manager/base.html' %} {% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'room/css/rooms.css' %}" />
+{% endblock %} {% block content %}
+
+<main class="main mb-5">
+    <div class="rooms_banner">
+        <h1>Rooms Offers</h1>
+    </div>
+
+    <div class="container">
+        <div class="rooms_content">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page">DEFAULT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">PRICE LOW TO HIGH</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">PRICE HIGH TO LOW</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">NAME (A-Z)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">NAME (Z-A)</a>
+                </li>
+            </ul>
+            <div class="row" style="padding-top: 40px">
+                <div class="col-9 rooms_list row">
+                    <a class="rooms_item col-6">
+                        <div class="card">
+                            <img
+                                src="https://albergo.qodeinteractive.com/wp-content/uploads/2017/11/List-3-feat-img-1-481x360.jpg"
+                                class="card-img-top img-fluid"
+                                alt="..."
+                            />
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">1000$</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="rooms_item col-6">
+                        <div class="card">
+                            <img
+                                src="https://albergo.qodeinteractive.com/wp-content/uploads/2017/11/List-3-feat-img-1-481x360.jpg"
+                                class="card-img-top img-fluid"
+                                alt="..."
+                            />
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">1000$</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="rooms_item col-6">
+                        <div class="card">
+                            <img
+                                src="https://albergo.qodeinteractive.com/wp-content/uploads/2017/11/List-3-feat-img-1-481x360.jpg"
+                                class="card-img-top img-fluid"
+                                alt="..."
+                            />
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">1000$</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="rooms_item col-6">
+                        <div class="card">
+                            <img
+                                src="https://albergo.qodeinteractive.com/wp-content/uploads/2017/11/List-3-feat-img-1-481x360.jpg"
+                                class="card-img-top img-fluid"
+                                alt="..."
+                            />
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">1000$</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-3 rooms_search">
+                    <form action="">
+                        <h4 style="text-align: center">Your Reservation</h4>
+                        <div class="mt-4">
+                            <label class="form-label">Check In</label>
+                            <input type="date" class="form-control" />
+                        </div>
+                        <div class="mt-3">
+                            <label class="form-label">Check Out</label>
+                            <input type="date" class="form-control" />
+                        </div>
+                        <div class="mt-3">
+                            <label class="form-label">Room</label>
+                            <select
+                                class="form-select"
+                                aria-label="Default select example"
+                            >
+                                <option selected value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                        <div class="mt-3">
+                            <label class="form-label">Adults</label>
+                            <select
+                                class="form-select"
+                                aria-label="Default select example"
+                            >
+                                <option selected value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </div>
+
+                        <div class="mt-3">
+                            <label for="customRange2" class="form-label"
+                                >0$-1000$</label
+                            >
+                            <input
+                                type="range"
+                                class="form-range"
+                                min="0"
+                                max="1000"
+                                id="customRange2"
+                            />
+                        </div>
+
+                        <div class="btn_rooms_filter_submit mt-3">
+                            <button class="btn btn-success">
+                                Filter Result
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
