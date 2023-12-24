@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import * 
 from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 # Create your views here.
 def loginUser(request):
@@ -48,3 +49,20 @@ def registerStaff(request):
 def logoutUser(request):
     logout(request)
     return redirect('home')
+
+@login_required(login_url='login')
+def profile(request):
+    user = get_object_or_404(Customer, user=request.user)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            # Update the instance with form data
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
+            user.phone = form.cleaned_data['phone']
+            user.national_id = form.cleaned_data['national_id']
+            user.save()
+            return redirect('profile')
+    else:
+        form = ProfileForm(initial={ 'first_name': user.first_name, 'last_name': user.last_name, 'phone': user.phone, 'national_id': user.national_id })
+    return render(request, 'user/profile.html', { 'form': form })

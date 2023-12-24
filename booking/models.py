@@ -16,13 +16,14 @@ class Booking(models.Model):
 
     checkin_date = models.DateField()
     checkout_date = models.DateField()
+    room_type = models.CharField(max_length=50, default='Mini Suite')
     total_price = models.FloatField()
     status = models.CharField(max_length=20, choices=PaymentStatus.choices, default=PaymentStatus.UNPAID)
 
     #relation
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    services = models.ManyToManyField(Service)
-    rooms = models.ManyToManyField(Room)
+    services = models.ManyToManyField(Service, null=True)
+    rooms = models.ManyToManyField(Room, null=True)
 
     def __str__(self):
         return {

@@ -1,5 +1,11 @@
-{% extends 'manager/pages/dashboard.html' %} {% block dashboard_section %}
+{% extends 'manager/pages/dashboard.html' %} 
+{% block dashboard_section %}
 <main>
+    <div class="row">
+        <div class="col-6">
+            <a href="{% url 'create-room-type' %}" type="button" class="btn btn-primary">Create</a>
+        </div>
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -12,14 +18,16 @@
             </tr>
         </thead>
         <tbody>
+            {% for room_type in room_types %}
             <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
+                <th scope="row">{{ room_type.id }}</th>
+                <td>{{ room_type.name }}</td>
+                <td>{{ room_type.description }}</td>
+                <td>{{ room_type.price }}</td>
+                <td>{{ room_type.num_adults }}</td>
+                <td>{{ room_type.num_children }}</td>
             </tr>
+            {% endfor %}
         </tbody>
     </table>
 </main>

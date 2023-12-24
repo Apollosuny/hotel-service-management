@@ -10,16 +10,16 @@
                     <!-- <img src="" alt=""> -->
                     <a href="/">Group 2</a>
                 </div>
-                <div class="menu-list">
-                    <div class="item">
+                <div class="menu-list d-flex flex-column gap-3">
+                    <a href="{% url 'dashboard' %}" class="item">
                         Dashboard
-                    </div>
-                    <div class="item">
+                    </a>
+                    <a href="{% url 'all-booking' %}" class="item">
                         Bookings
-                    </div>
-                    <div class="item">
+                    </a>
+                    <a href="{% url 'all-customers' %}" class="item">
                         Customers
-                    </div>
+                    </a>
                     <a href="{% url 'all-room' %}" class="d-block item">
                         Rooms
                     </a>

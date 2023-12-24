@@ -1,6 +1,9 @@
 {% extends 'manager/pages/dashboard.html' %} {% block dashboard_section %}
 <main>
-    <a href="{% url 'all-room-type' %}" type="button" class="btn btn-primary">Room Type</a>
+    <div>
+        <a href="{% url 'all-room-type' %}" type="button" class="btn btn-primary">Room Type</a>
+        <a href="{% url 'create-room' %}" type="button" class="btn btn-primary">Create room</a>
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -11,12 +14,14 @@
             </tr>
         </thead>
         <tbody>
+            {% for room in rooms %}
             <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <th scope="row">{{ room.id }}</th>
+                <td>{{ room.room_number }}</td>
+                <td>{{ room.room_type }}</td>
+                <td>{{ room.status }}</td>
             </tr>
+            {% endfor %}
         </tbody>
     </table>
 </main>

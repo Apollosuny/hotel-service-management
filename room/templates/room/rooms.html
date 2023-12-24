@@ -28,7 +28,8 @@
             </ul>
             <div class="row" style="padding-top: 40px">
                 <div class="col-9 rooms_list row">
-                    <a class="rooms_item col-6">
+                    {% for room in rooms %}
+                    <a href="/rooms/{{ room.id }}" class="rooms_item col-6">
                         <div class="card">
                             <img
                                 src="https://albergo.qodeinteractive.com/wp-content/uploads/2017/11/List-3-feat-img-1-481x360.jpg"
@@ -36,50 +37,12 @@
                                 alt="..."
                             />
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">1000$</p>
+                                <h5 class="card-title">{{ room.room_type.name }}</h5>
+                                <p class="card-text">${{ room.room_type.price }}</p>
                             </div>
                         </div>
                     </a>
-                    <a class="rooms_item col-6">
-                        <div class="card">
-                            <img
-                                src="https://albergo.qodeinteractive.com/wp-content/uploads/2017/11/List-3-feat-img-1-481x360.jpg"
-                                class="card-img-top img-fluid"
-                                alt="..."
-                            />
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">1000$</p>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="rooms_item col-6">
-                        <div class="card">
-                            <img
-                                src="https://albergo.qodeinteractive.com/wp-content/uploads/2017/11/List-3-feat-img-1-481x360.jpg"
-                                class="card-img-top img-fluid"
-                                alt="..."
-                            />
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">1000$</p>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="rooms_item col-6">
-                        <div class="card">
-                            <img
-                                src="https://albergo.qodeinteractive.com/wp-content/uploads/2017/11/List-3-feat-img-1-481x360.jpg"
-                                class="card-img-top img-fluid"
-                                alt="..."
-                            />
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">1000$</p>
-                            </div>
-                        </div>
-                    </a>
+                    {% endfor %}
                 </div>
                 <div class="col-3 rooms_search">
                     <form action="">

@@ -13,6 +13,9 @@ class RoomType(models.Model):
     num_adults = models.IntegerField()
     num_children = models.IntegerField()
 
+    def __str__(self):
+        return self.name
+
 class Room(models.Model):
 
     class Meta:

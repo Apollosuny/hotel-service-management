@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, SetPasswordForm, PasswordResetForm
 from django.contrib.auth import get_user_model
+from .models import *
 
 class UserRegistrationForm(UserCreationForm):
     class Meta:
@@ -31,3 +32,8 @@ class CustomSetPasswordForm(SetPasswordForm):
     class Meta:
         model = get_user_model()
         fields = ['newpassword1', 'newpassword2']
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ['first_name', 'last_name', 'phone', 'national_id']

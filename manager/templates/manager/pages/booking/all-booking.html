@@ -1,0 +1,31 @@
+{% extends 'manager/pages/dashboard.html' %} 
+{% block dashboard_section %}
+<main>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Check-in Date</th>
+                <th scope="col">Check-out Date</th>
+                <th scope="col">Total Price</th>
+                <th scope="col">Room Type</th>
+                <th scope="col">Status</th>
+                <th scope="col">Customer</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+                <tr>
+                    <td scope="col">{{ booking.id }}</td>
+                    <td scope="col">{{ booking.checkin_date }}</td>
+                    <td scope="col">{{ booking.checkout_date }}</td>
+                    <td scope="col">{{ booking.total_price }}</td>
+                    <td scope="col">{{ booking.room_type }}</td>
+                    <td scope="col">{{ booking.status }}</td>
+                    <td scope="col">{{ booking.customer.first_name }} {{ booking.customer.last_name }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+{% endblock %}

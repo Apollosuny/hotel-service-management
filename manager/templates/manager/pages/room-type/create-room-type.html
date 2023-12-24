@@ -1,11 +1,10 @@
-{% extends 'manager/base.html' %}
-{% load crispy_forms_tags %}
-{% block content %}
+{% extends 'manager/pages/dashboard.html' %} 
+{% load crispy_forms_tags %} 
+{% block dashboard_section %}
 <main>
-    <div class="container">
+    <div>
         <form action="" method="POST">
-            {% csrf_token %}
-            {{ form|crispy }}
+            {% csrf_token %} {{ form|crispy }}
             <div>
                 <button type="submit" class="btn btn-primary">Create</button>
             </div>

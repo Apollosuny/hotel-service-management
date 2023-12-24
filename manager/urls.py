@@ -3,12 +3,16 @@ from . import views as manager
 from user.views import registerStaff
 
 urlpatterns = [
-    path('room-types/create', manager.room_type, name='room-type'),
+    path('room-types/create', manager.create_room_type, name='create-room-type'),
     path('room-types/', manager.all_room_type, name='all-room-type'),
     path('rooms/', manager.all_room, name='all-room'),
-    path('rooms/create/', manager.room, name='room'),
-    path('services', manager.allServices, name='services'),
-    path('services/create/', manager.service, name='service'),
+    path('rooms/create/', manager.create_room, name='create-room'),
+    path('services/', manager.allServices, name='services'),
+    path('services/create/', manager.create_service, name='create-service'),
+    path('services/<int:id>', manager.updateAService, name='update-service'),
+    path('services/delete/<int:id>', manager.deleteAService, name='delete-service'),
+    path('customers/', manager.all_customers, name='all-customers'),
+    path('booking/', manager.all_booking, name='all-booking'),
     path('about/', manager.about, name='about'),
     path('staffs/register', registerStaff, name='staff-register'),
     path('', manager.dashboard, name='dashboard'),
