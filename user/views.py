@@ -13,10 +13,10 @@ def loginUser(request):
             if user.role == 'USER':
                 login(request, user)
                 return redirect('home')
-            # elif user.is_staff == True and user.is_superuser == False:
-            #     login(request, user)
-            #     # messages.success(request, 'Đăng nhập thành công')
-            #     return redirect('admin-page')
+            elif user.is_staff == True and user.role == 'STAFF':
+                login(request, user)
+                # messages.success(request, 'Đăng nhập thành công')
+                return redirect('dashboard')
             # elif user.is_superuser and user.is_staff:
             #     login(request, user)
             #     # messages.success(request, 'Đăng nhập thành công')

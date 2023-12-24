@@ -144,6 +144,17 @@ class linked_list:
         else:
             return "Không tìm thấy nút với dữ liệu cần sửa"
 
+def linear_search(linked_list, target):
+    current = linked_list.head
+    while current:
+        print(current.data)
+        if current.data == target:
+            print('tìm thấy')
+            return current.data  # Phần tử được tìm thấy
+        current = current.next
+
+    return None  # Phần tử không được tìm thấy
+
 default_data = [
     { 'room_id': 1, 'room_number': '302', 'room_type': 'luxury', 'status': 'empty' },
     { 'room_id': 2, 'room_number': '303', 'room_type': 'classic', 'status': 'full' },
@@ -154,19 +165,18 @@ default_data = [
 
 ll = linked_list()
 
-
 for data in default_data:
     ll.append(data)
 
-print(ll.get(1))
+# print(ll.get(1))
 
-print('Display: ')
-ll.display()
+# print('Display: ')
+# ll.display()
 
 for data in default_data:
     if data['room_id'] == 1:
         ll.update_node(data, { 
-            id: data['room_id'], 
+            'room_id': data['room_id'], 
             'room_number': data['room_number'],
             'room_type': data['room_type'],
             'status': 'full'
@@ -188,10 +198,12 @@ for data in default_data:
 #             'status': 'full'
 #             })
 
-print('Display after updated: ')
-ll.display()
+# print('Display after updated: ')
+# ll.display()
 
-ll.erase(1)
+# ll.erase(1)
 
-print('Display after deleted: ')
-ll.display()
+# print('Display after deleted: ')
+# ll.display()
+
+# print(linear_search(ll, '302'))

@@ -32,6 +32,9 @@ class Room(models.Model):
     # relations
     room_type = models.ForeignKey(RoomType, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return (f'{self.room_number} {self.room_type.name} {self.status}')
+
 class Service(models.Model):
 
     class Meta:

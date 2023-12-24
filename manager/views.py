@@ -15,6 +15,7 @@ def dashboard(request):
 @user_passes_test(lambda user: user.role == 'STAFF', login_url='home')
 def all_room_type(request):
     room_types = RoomType.objects.all()
+
     return render(request, 'manager/pages/room-type/all-room-type.html', { 'room_types': room_types })
 
 @login_required(login_url='login')
