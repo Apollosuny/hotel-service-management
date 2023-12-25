@@ -4,7 +4,8 @@ from room.models import *
 from user.models import User
 from booking.models import Booking
 from django.contrib.auth.decorators import login_required, user_passes_test
-
+from helpers.linked_list import linked_list
+from helpers.search import searchForRoomType
 # Create your views here.
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.role == 'STAFF', login_url='home')
@@ -15,7 +16,18 @@ def dashboard(request):
 @user_passes_test(lambda user: user.role == 'STAFF', login_url='home')
 def all_room_type(request):
     room_types = RoomType.objects.all()
-
+    # push vào linklist 
+    newlinkedlist = linked_list()
+    # add data to the linked list 
+    for item in room_types:
+        newlinkedlist.append(item)
+    # search data return the array 
+    ArrRoom = searchForRoomType(linklist=newlinkedlist,price=400,name='haha')
+    if  ArrRoom == "Not found":
+        print("Not found")
+    else : 
+        for item in ArrRoom:
+            print('Name: ' , item.name , " " , "Price: ",item.price ," ","Num_adults: ",item.num_adults," ","Num_children: ",item.num_children)
     return render(request, 'manager/pages/room-type/all-room-type.html', { 'room_types': room_types })
 
 @login_required(login_url='login')
