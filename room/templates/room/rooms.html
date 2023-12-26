@@ -45,7 +45,7 @@
                     {% endfor %}
                 </div>
                 <div class="col-3 rooms_search">
-                    <form action="">
+                    <form method="GET" action="">
                         <h4 style="text-align: center">Your Reservation</h4>
                         <div class="mt-4">
                             <label class="form-label">Check In</label>
@@ -72,13 +72,14 @@
                             <select
                                 class="form-select"
                                 aria-label="Default select example"
+                                name="adults"
                             >
-                                <option selected value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
+                                <option {% if adults == '1' or not adults %} selected {% endif %} value="1">1</option>
+                                <option {% if adults == '2' %} selected {% endif %} value="2">2</option>
+                                <option {% if adults == '3' %} selected {% endif %} value="3">3</option>
+                                <option {% if adults == '4' %} selected {% endif %} value="4">4</option>
+                                <option {% if adults == '5' %} selected {% endif %} value="5">5</option>
+                                <option {% if adults == '6' %} selected {% endif %} value="6">6</option>
                             </select>
                         </div>
 

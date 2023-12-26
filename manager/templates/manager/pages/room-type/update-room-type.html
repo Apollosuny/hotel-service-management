@@ -1,0 +1,16 @@
+{% extends 'manager/pages/dashboard.html' %} 
+{% load crispy_forms_tags %} 
+{% block dashboard_section %}
+<main>
+    <div class="container">
+        <h3>Update Room Type: </h3>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}

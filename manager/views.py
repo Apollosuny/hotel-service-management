@@ -12,33 +12,53 @@ from helpers.search import searchForRoomType
 def dashboard(request):
     return render(request, 'manager/components/dashboard-section.html')
 
-@login_required(login_url='login')
-@user_passes_test(lambda user: user.role == 'STAFF', login_url='home')
-def all_room_type(request):
+def initialLinkedList(data, text):
+    new_linked_list = linked_list()
     room_types = RoomType.objects.all()
+    for data in room_types:
+        new_linked_list.append(data)
+    print(f'Before {text}')
+    for item in new_linked_list.display():
+        print(f'Name: {item.name} - Price: {item.price}')
+
+def searchPrice(room_types, search):
     # push vào linklist 
     newlinkedlist = linked_list()
     # add data to the linked list 
     for item in room_types:
         newlinkedlist.append(item)
     # search data return the array 
-    ArrRoom = searchForRoomType(linklist=newlinkedlist,price=400,name='haha')
+    ArrRoom = searchForRoomType(linklist=newlinkedlist,price=int(search))
     if  ArrRoom == "Not found":
         print("Not found")
     else : 
         for item in ArrRoom:
             print('Name: ' , item.name , " " , "Price: ",item.price ," ","Num_adults: ",item.num_adults," ","Num_children: ",item.num_children)
+
+@login_required(login_url='login')
+@user_passes_test(lambda user: user.role == 'STAFF', login_url='home')
+def all_room_type(request):
+    if request.method == 'GET':
+        room_types = RoomType.objects.all()
+        search = request.GET.get('search')
+        if search is not None and search != '':
+            searchPrice(room_types, search)
+            room_types = RoomType.objects.filter(price=int(search))
+            return render(request, 'manager/pages/room-type/all-room-type.html', { 'room_types': room_types, 'search': search })
+        return render(request, 'manager/pages/room-type/all-room-type.html', { 'room_types': room_types })
     return render(request, 'manager/pages/room-type/all-room-type.html', { 'room_types': room_types })
 
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.role == 'STAFF', login_url='home')
 def create_room_type(request):
+    new_linked_list = linked_list()
+    room_types = RoomType.objects.all()
+    for data in room_types:
+        new_linked_list.append(data)
+    print("Before add new")
+    for item in new_linked_list.display():
+        print(f'Name: {item.name} - Price: {item.price}')
     if request.method == 'POST':
-        print(request.POST['name'])
-        print(request.POST['description'])
-        print(request.POST['price'])
-        print(request.POST['numb_adults'])
-        print(request.POST['numb_children'])
         type = RoomType(
             name=request.POST['name'],
             description=request.POST['description'],
@@ -46,11 +66,51 @@ def create_room_type(request):
             num_adults=request.POST['numb_adults'],
             num_children=request.POST['numb_children']
         )
+        new_linked_list.append(type)
         type.save()
+        print("After add new")
+        for item in new_linked_list.display():
+            print(f'Name: {item.name} - Price: {item.price}')
         return redirect('all-room-type')
     else:
         form = RoomTypeForm()
+    
     return render(request, 'manager/pages/room-type/create-room-type.html', { 'form': form })
+
+@login_required(login_url='login')
+@user_passes_test(lambda user: user.role == 'STAFF', login_url='home')
+def updateARoomType(request, id):
+    all_room_type = RoomType.objects.all()
+    room_type = get_object_or_404(RoomType, pk=id)
+    new_linked_list = linked_list()
+    for data in all_room_type:
+        new_linked_list.append(data)
+    print("Before add new")
+    for item in new_linked_list.display():
+        print(f'Name: {item.name} - Price: {item.price}')
+
+    if request.method == 'POST':
+        form = RoomTypeForm(request.POST)
+        if form.is_valid():
+            # Update the instance with form data
+            room_type.name = form.cleaned_data['name']
+            room_type.description = form.cleaned_data['description']
+            room_type.price = form.cleaned_data['price']
+            room_type.num_adults = form.cleaned_data['numb_adults']
+            room_type.num_children = form.cleaned_data['numb_children']
+            room_type.save()
+
+            return redirect('all-room-type')
+    else:
+        form = RoomTypeForm(initial={ 
+            'name': room_type.name, 
+            'description': room_type.description, 
+            'price': room_type.price,
+            'numb_adults': room_type.num_adults,
+            'numb_children': room_type.num_children
+        })
+
+    return render(request, 'manager/pages/room-type/update-room-type.html', { 'form': form })
 
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.role == 'STAFF', login_url='home')

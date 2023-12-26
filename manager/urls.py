@@ -4,6 +4,7 @@ from user.views import registerStaff
 
 urlpatterns = [
     path('room-types/create', manager.create_room_type, name='create-room-type'),
+    path('room-types/<int:id>', manager.updateARoomType, name='update-room-type'),
     path('room-types/', manager.all_room_type, name='all-room-type'),
     path('rooms/', manager.all_room, name='all-room'),
     path('rooms/create/', manager.create_room, name='create-room'),

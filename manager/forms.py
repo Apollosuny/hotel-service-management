@@ -18,5 +18,5 @@ class RoomForm(forms.Form):
 
 class ServiceForm(forms.Form):
     name = forms.CharField(label='Name Service', max_length=50)
-    description = forms.CharField(label='Description', max_length=100)
+    description = forms.CharField(label='Description', max_length=200)
     price = forms.DecimalField(label='Price')

@@ -31,7 +31,7 @@ class linked_list:
         while cur_node.next != None:
             cur_node = cur_node.next
             elems.append(cur_node.data)
-        print(elems)
+        return elems
 
     # Returns the value of the node at 'index'.
     def get(self, index):
@@ -129,8 +129,9 @@ class linked_list:
             cur_idx += 1
     
     def sequential_search(self, target):
-        current = self.head
-        while current:
+        current = self.head.next
+        while current != None:
+            print(current.data)
             if current.data == target:
                 return current
             current = current.next
@@ -181,29 +182,3 @@ for data in default_data:
             'room_type': data['room_type'],
             'status': 'full'
             })
-
-# ll.update_node(
-#             { id: 1, 'room_number': '302', 'room_type': 'luxury', 'status': 'empty' }, { 
-#             id: 1, 
-#             'room_number': '302',
-#             'room_type': 'luxury',
-#             'status': 'full'
-#             })
-
-
-
-# ll.update_node('1', {id: 1, 
-#             'room_number': '302',
-#             'room_type': 'luxury',
-#             'status': 'full'
-#             })
-
-# print('Display after updated: ')
-# ll.display()
-
-# ll.erase(1)
-
-# print('Display after deleted: ')
-# ll.display()
-
-# print(linear_search(ll, '302'))
