@@ -87,8 +87,8 @@ def updateARoomType(request, id):
         new_linked_list.append(data)
     print("Before add new")
     for item in new_linked_list.display():
-        print(f'Name: {item.name} - Price: {item.price}')
-
+        print(f'Name: {item.name} - Price: {item.price} - Adults: {item.num_adults} - Children: {item.num_children}')
+    
     if request.method == 'POST':
         form = RoomTypeForm(request.POST)
         if form.is_valid():
@@ -98,7 +98,13 @@ def updateARoomType(request, id):
             room_type.price = form.cleaned_data['price']
             room_type.num_adults = form.cleaned_data['numb_adults']
             room_type.num_children = form.cleaned_data['numb_children']
+            new_linked_list.update_node(id, room_type)
+            # print(new_linked_list.get_node_at_index(id))
             room_type.save()
+
+            print("After update data:")
+            for item in new_linked_list.display():
+                print(f'Name: {item.name} - Price: {item.price} - Adults: {item.num_adults} - Children: {item.num_children}')
 
             return redirect('all-room-type')
     else:
@@ -111,6 +117,25 @@ def updateARoomType(request, id):
         })
 
     return render(request, 'manager/pages/room-type/update-room-type.html', { 'form': form })
+
+@login_required(login_url='login')
+@user_passes_test(lambda user: user.role == 'STAFF', login_url='home')
+def deleteARoomType(request, id):
+    all_room_type = RoomType.objects.all()
+    room_type = get_object_or_404(RoomType, pk=id)
+    new_linked_list = linked_list()
+    for data in all_room_type:
+        new_linked_list.append(data)
+    print("Before delete")
+    for item in new_linked_list.display():
+        print(f'Name: {item.name} - Price: {item.price} - Adults: {item.num_adults} - Children: {item.num_children}')
+    if room_type:
+        new_linked_list.delete_node_by_index(id)
+        room_type.delete()
+        print("After delete")
+        for item in new_linked_list.display():
+            print(f'Name: {item.name} - Price: {item.price} - Adults: {item.num_adults} - Children: {item.num_children}')
+        return redirect('all-room-type')
 
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.role == 'STAFF', login_url='home')

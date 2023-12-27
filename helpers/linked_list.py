@@ -46,6 +46,18 @@ class linked_list:
                 return cur_node.data
             cur_idx += 1
 
+    def get_node_at_index(self, index):
+        current = self.head
+        current_index = 0
+
+        while current:
+            if current_index == index:
+                return current.data
+            current = current.next
+            current_index += 1
+
+        return None  # Trả về None nếu chỉ mục không hợp lệ
+
     # Deletes the node at index 'index'.
     def erase(self, index):
         if index >= self.length() or index < 0:  # added 'index<0' post-video
@@ -60,13 +72,28 @@ class linked_list:
                 last_node.next = cur_node.next
                 return
             cur_idx += 1
+    
+    def delete_node_by_index(self, index):
+        current = self.head
+        previous = None
+        current_index = 0
+
+        while current:
+            if current_index == index:
+                if previous:
+                    previous.next = current.next
+                else:
+                    self.head = current.next
+                return
+            previous = current
+            current = current.next
+            current_index += 1
+
+        print(f"Index {index} out of range")
 
     # Allows for bracket operator syntax (i.e. a[0] to return first item).
     def __getitem__(self, index):
         return self.get(index)
-
-    #######################################################
-    # Functions added after video tutorial
 
     # Inserts a new node at index 'index' containing data 'data'.
     # Indices begin at 0. If the provided index is greater than or
@@ -128,33 +155,17 @@ class linked_list:
                 return
             cur_idx += 1
     
-    def sequential_search(self, target):
-        current = self.head.next
-        while current != None:
-            print(current.data)
-            if current.data == target:
-                return current
+    def update_node(self, index, new_data):
+        current = self.head
+        current_index = 0
+
+        while current:
+            if current_index == index:
+                current.data = new_data
+                return "Updated successfully!"
             current = current.next
-        return None
-
-    def update_node(self, target, new_data):
-        node = self.sequential_search(target)
-        if node:
-            node.data = new_data
-            return "Sửa thành công"
-        else:
-            return "Không tìm thấy nút với dữ liệu cần sửa"
-
-def linear_search(linked_list, target):
-    current = linked_list.head
-    while current:
-        print(current.data)
-        if current.data == target:
-            print('tìm thấy')
-            return current.data  # Phần tử được tìm thấy
-        current = current.next
-
-    return None  # Phần tử không được tìm thấy
+            current_index += 1
+        return "Data not found!"
 
 default_data = [
     { 'room_id': 1, 'room_number': '302', 'room_type': 'luxury', 'status': 'empty' },
@@ -163,22 +174,3 @@ default_data = [
     { 'room_id': 4, 'room_number': '305', 'room_type': 'luxury', 'status': 'cleaned' },
     { 'room_id': 5, 'room_number': '306', 'room_type': 'classic', 'status': 'empty' },
 ]
-
-ll = linked_list()
-
-for data in default_data:
-    ll.append(data)
-
-# print(ll.get(1))
-
-# print('Display: ')
-# ll.display()
-
-for data in default_data:
-    if data['room_id'] == 1:
-        ll.update_node(data, { 
-            'room_id': data['room_id'], 
-            'room_number': data['room_number'],
-            'room_type': data['room_type'],
-            'status': 'full'
-            })

@@ -16,11 +16,19 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {% if user.is_authenticated and user.role == 'STAFF' %}
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'dashboard' %}"
+                                >Dashboard</a
+                            >
+                        </li>
+                    {% else %}
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/"
                             >Home</a
                         >
                     </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a
                             class="nav-link"
@@ -37,11 +45,6 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{% url 'about' %}"
                             >About</a
-                        >
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#"
-                            >Blog</a
                         >
                     </li>
                     <li class="nav-item">
@@ -72,7 +75,7 @@
                                             alt="Avatar"
                                         />
                                     </div>
-                                    <div>Trần Bảo Trung</div>
+                                    <div>{{ user.username }}</div>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
@@ -95,7 +98,7 @@
                         </ul>
                     </div>
                     {% else %}
-                    <a href="{% url 'login' %}" class="btn btn-outline-success"
+                    <a href="{% url 'login' %}" class="btn btn-outline-info"
                         >Sign in</a
                     >
                     <a href="{% url 'register' %}" class="btn btn-info"

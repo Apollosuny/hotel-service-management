@@ -1,4 +1,8 @@
 {% extends 'manager/base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'manager/css/dashboard.css' %}" />
+{% endblock %} 
 
 {% block content %}
 
@@ -10,29 +14,32 @@
                     <!-- <img src="" alt=""> -->
                     <a href="/">Group 2</a>
                 </div>
-                <div class="menu-list d-flex flex-column gap-3">
-                    <a href="{% url 'dashboard' %}" class="item">
+                <div class="menu-list d-flex flex-column gap-1">
+                    <a href="{% url 'dashboard' %}" class="item {% if request.path == '/wp-admin/' %}item-active{% endif %}">
+                        <i class="fa-solid fa-archway" style="margin-right: 10px;"></i>
                         Dashboard
                     </a>
-                    <a href="{% url 'all-booking' %}" class="item">
+                    <a href="{% url 'all-booking' %}" class="item {% if request.path == '/wp-admin/booking/' %}item-active{% endif %}">
+                        <i class="fa-brands fa-first-order-alt" style="margin-right: 10px;"></i>
                         Bookings
                     </a>
-                    <a href="{% url 'all-customers' %}" class="item">
+                    <a href="{% url 'all-customers' %}" class="item {% if request.path == '/wp-admin/customers/' %}item-active{% endif %}">
+                        <i class="fa-solid fa-user-group" style="margin-right: 10px;"></i>
                         Customers
                     </a>
-                    <a href="{% url 'all-room' %}" class="d-block item">
+                    <a href="{% url 'all-room' %}" class="d-block item {% if request.path == '/wp-admin/rooms/' %}item-active{% endif %}">
+                        <i class="fa-solid fa-hotel" style="margin-right: 10px;"></i>
                         Rooms
                     </a>
-                    <a href="{% url 'services' %}" class="item">
+                    <a href="{% url 'services' %}" class="item {% if request.path == '/wp-admin/services/' %}item-active{% endif %}">
+                        <i class="fa-brands fa-servicestack" style="margin-right: 10px;"></i>
                         Services
                     </a>
                     <div class="item">
+                        <i class="fa-solid fa-gears" style="margin-right: 10px;"></i>
                         Settings
                     </div>
                 </div>
-            </div>
-            <div class="logout">
-                <a href="/logout">Logout</a>
             </div>
         </div>
         <div class="col-9">

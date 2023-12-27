@@ -1,0 +1,23 @@
+.menu {
+    background-color: white;
+    padding: 16px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+}
+
+.menu-list {
+    
+}
+
+.menu-list > .item {
+    padding: 8px 16px;
+}
+
+.item-active {
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    background-color: rgb(33, 212, 253);
+    padding: 8px 16px;
+    border-radius: 6px;
+}
