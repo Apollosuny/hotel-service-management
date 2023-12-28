@@ -6,6 +6,7 @@ from booking.models import Booking
 from django.contrib.auth.decorators import login_required, user_passes_test
 from helpers.linked_list import linked_list
 from helpers.search import searchForRoomType
+from helpers.tsort import timsort
 # Create your views here.
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.role == 'STAFF', login_url='home')
@@ -41,10 +42,24 @@ def all_room_type(request):
     if request.method == 'GET':
         room_types = RoomType.objects.all()
         search = request.GET.get('search')
+        sort = request.GET.get('sort')
         if search is not None and search != '':
             searchPrice(room_types, search)
             room_types = RoomType.objects.filter(price=int(search))
             return render(request, 'manager/pages/room-type/all-room-type.html', { 'room_types': room_types, 'search': search })
+
+        newlinkedlist = linked_list()
+        # add data to the linked list 
+        for item in room_types:
+            newlinkedlist.append(item)
+        print("Before sort")
+        for item in newlinkedlist.display():
+            print(f'Name: {item.name} - Price: {item.price}')
+        # sort_room = timsort(newlinkedlist, key=lambda x: x.price)
+        # print("After sort")
+        # for item in sort_room:
+        #     print(f'Name: {item.name} - Price: {item.price}')
+
         return render(request, 'manager/pages/room-type/all-room-type.html', { 'room_types': room_types })
     return render(request, 'manager/pages/room-type/all-room-type.html', { 'room_types': room_types })
 

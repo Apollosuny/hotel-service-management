@@ -77,11 +77,13 @@ WSGI_APPLICATION = 'room_management_system.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ['MYSQL_NAME'],
-        'USER': os.environ['MYSQL_USER'],
-        'PASSWORD': os.environ['MYSQL_PASSWORD'],
-        'HOST': os.environ['MYSQL_HOST']
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': os.environ['MYSQL_NAME'],
+        # 'USER': os.environ['MYSQL_USER'],
+        # 'PASSWORD': os.environ['MYSQL_PASSWORD'],
+        # 'HOST': os.environ['MYSQL_HOST']
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
