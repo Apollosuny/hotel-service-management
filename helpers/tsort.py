@@ -4,7 +4,7 @@ class HotelRoom:
         self.occupancy = occupancy
         self.price = price
 
-def insertion_sort(arr, key=lambda x: x.room_number):
+def insertion_sort(arr, key=lambda x: x.price):
     for i in range(1, len(arr)):
         key_value = arr[i]
         j = i - 1
@@ -13,7 +13,7 @@ def insertion_sort(arr, key=lambda x: x.room_number):
             j -= 1
         arr[j + 1] = key_value
 
-def merge(left, right, key=lambda x: x.room_number):
+def merge(left, right, key=lambda x: x.price):
     result = []
     i = j = 0
 
@@ -29,11 +29,11 @@ def merge(left, right, key=lambda x: x.room_number):
     result.extend(right[j:])
     return result
 
-def timsort(arr, key=lambda x: x.room_number):
+def timsort(arr, key=lambda x: x.price):
     min_run = 32
 
     for i in range(0, len(arr), min_run):
-        insertion_sort(arr, i, min((i + min_run - 1), len(arr) - 1))
+        insertion_sort(arr[i:min((i + min_run), len(arr))], key=key)
 
     size = min_run
     while size < len(arr):
@@ -66,8 +66,8 @@ if __name__ == "__main__":
     for room in rooms:
         print(f"Room {room.room_number} - Occupancy: {room.occupancy}, Price: ${room.price}")
 
-    sorted_rooms = timsort(rooms, key=lambda x: x.room_number)
+    sorted_rooms = timsort(rooms, key=lambda x: x.price)
 
-    print("\nRooms (sorted):")
+    print("\nRooms (sorted by price):")
     for room in sorted_rooms:
         print(f"Room {room.room_number} - Occupancy: {room.occupancy}, Price: ${room.price}")
