@@ -11,6 +11,7 @@
                 <th scope="col">Room Type</th>
                 <th scope="col">Status</th>
                 <th scope="col">Customer</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +24,10 @@
                     <td scope="col">{{ booking.room_type }}</td>
                     <td scope="col">{{ booking.status }}</td>
                     <td scope="col">{{ booking.customer.first_name }} {{ booking.customer.last_name }}</td>
+                    <td scope="col">
+                        <a href="" class="btn btn-info">Edit</a>
+                        <a href="" class="btn btn-danger">Delete</a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

@@ -161,13 +161,17 @@ def all_room(request):
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.role == 'STAFF', login_url='home')
 def create_room(request):
+    error_message = ''
+    form = RoomForm()
     if request.method == 'POST':
+        room_number = request.POST['room_number']
+        if Room.objects.filter(room_number=room_number).exists():
+            error_message = 'The room is duplicated'
+            return render(request, 'manager/pages/rooms/room-create.html', { 'form': form, 'message': error_message })
         room_type = RoomType.objects.get(name=request.POST['room_type'])
         new_room = Room(room_number=request.POST['room_number'], room_type_id=room_type.id)
         new_room.save()
         return redirect('all-room')
-    else:
-        form = RoomForm()
     return render(request, 'manager/pages/rooms/room-create.html', { 'form': form })
 
 @login_required(login_url='login')

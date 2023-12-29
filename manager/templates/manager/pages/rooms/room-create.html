@@ -3,6 +3,11 @@
 {% block dashboard_section %}
 <main>
     <div class="container">
+        {% if message %}
+        <div class="alert alert-danger" role="alert">
+            {{ message }}
+          </div>
+        {% endif %}
         <form action="" method="POST">
             {% csrf_token %}
             {{ form|crispy }}

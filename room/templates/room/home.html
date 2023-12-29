@@ -10,50 +10,52 @@
 <main>
     <div class="banner position-relative">
         <div class="container banner-content d-flex justify-content-center">
+            <form action="">
             <div class="inner d-flex gap-5 align-items-center justify-content-center">
-                <div class="check-in">
-                    <div class="check-in-icon">
-                        <i class="fa-solid fa-calendar-days"></i>
-                        CHECK-IN
+                    <div class="check-in">
+                        <div class="check-in-icon">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            CHECK-IN
+                        </div>
+                        <div class="check-in-date">
+                            <input type="date" name="checkin" />
+                        </div>
                     </div>
-                    <div class="check-in-date">
-                        <input type="date" name="checkin" />
+                    <div class="separate"></div>
+                    <div class="check-out">
+                        <div class="check-out-icon">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            CHECK-OUT
+                        </div>
+                        <div class="check-in-date">
+                            <input type="date" name="checkout" />
+                        </div>
+                    </div>
+                    <div class="separate"></div>
+                    <div class="adults">
+                        <div class="adults-icon">
+                            <i class="fa-regular fa-user"></i>
+                            Adults
+                        </div>
+                        <div class="adults-date">
+                            <input type="number" name="adults" />
+                        </div>
+                    </div>
+                    <div class="separate"></div>
+                    <div class="children">
+                        <div class="children-icon">
+                            <i class="fa-solid fa-child"></i>
+                            Children
+                        </div>
+                        <div class="children-date">
+                            <input type="number" name="children" />
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary">Search</button>
                     </div>
                 </div>
-                <div class="separate"></div>
-                <div class="check-out">
-                    <div class="check-out-icon">
-                        <i class="fa-solid fa-calendar-days"></i>
-                        CHECK-OUT
-                    </div>
-                    <div class="check-in-date">
-                        <input type="date" name="checkout" />
-                    </div>
-                </div>
-                <div class="separate"></div>
-                <div class="adults">
-                    <div class="adults-icon">
-                        <i class="fa-regular fa-user"></i>
-                        Adults
-                    </div>
-                    <div class="adults-date">
-                        <input type="number" name="adults" />
-                    </div>
-                </div>
-                <div class="separate"></div>
-                <div class="children">
-                    <div class="children-icon">
-                        <i class="fa-solid fa-child"></i>
-                        Children
-                    </div>
-                    <div class="children-date">
-                        <input type="number" name="children" />
-                    </div>
-                </div>
-                <div>
-                    <button class="btn btn-primary">Search</button>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
     <div class="container" style="margin-top: 100px;">

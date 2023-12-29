@@ -10,9 +10,9 @@
     <div class="container">
         <div class="rooms_content">
             <ul class="nav justify-content-around">
-                <li class="nav-item">{{ room.room_type.name }}</li>
+                <li class="nav-item">{{ room.name }}</li>
                 <li class="nav-item">
-                    ${{ room.room_type.price }} / per night
+                    ${{ room.price }} / per night
                 </li>
             </ul>
             <div class="row" style="padding-top: 40px">
@@ -173,7 +173,7 @@
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                             </select> -->
-                            <input type="text" value="{{ room.room_type.name }}" name="room" class="form-control" />
+                            <input type="text" value="{{ room.name }}" name="room" class="form-control" />
                         </div>
                         <div class="mt-3">
                             <label class="form-label">Adults</label>
@@ -188,7 +188,7 @@
                             <input
                                 type="number"
                                 class="form-control"
-                                value="{{ room.room_type.num_adults }}"
+                                value="{{ room.num_adults }}"
                                 name="numb_adults"
                                 disabled
                             />
@@ -206,7 +206,7 @@
                             <input
                                 type="number"
                                 class="form-control"
-                                value="{{ room.room_type.num_children }}"
+                                value="{{ room.num_children }}"
                                 name="numb_children"
                                 disabled
                             />
@@ -217,7 +217,7 @@
                             <input
                                 type="text"
                                 class="form-control"
-                                value="{{ room.room_type.price }}"
+                                value="{{ room.price }}"
                                 disabled
                             />
                         </div>

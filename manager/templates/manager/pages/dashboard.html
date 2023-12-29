@@ -27,7 +27,13 @@
                         <i class="fa-solid fa-user-group" style="margin-right: 10px;"></i>
                         Customers
                     </a>
-                    <a href="{% url 'all-room' %}" class="d-block item {% if request.path == '/wp-admin/rooms/' %}item-active{% endif %}">
+                    <a 
+                        href="{% url 'all-room' %}" 
+                        class="
+                            d-block 
+                            item 
+                            {% if request.path == '/wp-admin/rooms/' or request.path == '/wp-admin/rooms/create/' or request.path == '/wp-admin/room-types/' or request.path == '/wp-admin/room-types/create' %}item-active{% endif %}"
+                        >
                         <i class="fa-solid fa-hotel" style="margin-right: 10px;"></i>
                         Rooms
                     </a>
