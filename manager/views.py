@@ -39,29 +39,30 @@ def searchPrice(room_types, search):
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.role == 'STAFF', login_url='home')
 def all_room_type(request):
-    if request.method == 'GET':
-        room_types = RoomType.objects.all()
-        search = request.GET.get('search')
-        sort = request.GET.get('sort')
-        if search is not None and search != '':
-            searchPrice(room_types, search)
-            room_types = RoomType.objects.filter(price=int(search))
-            return render(request, 'manager/pages/room-type/all-room-type.html', { 'room_types': room_types, 'search': search })
+    room_types = RoomType.objects.all()
+    search = request.GET.get('search')
+    sort = request.GET.get('sort')
 
-        newlinkedlist = linked_list()
-        # add data to the linked list 
-        for item in room_types:
-            newlinkedlist.append(item)
-        print("Before sort")
-        for item in newlinkedlist.display():
-            print(f'Name: {item.name} - Price: {item.price}')
-        # sort_room = timsort(newlinkedlist, key=lambda x: x.price)
-        # print("After sort")
-        # for item in sort_room:
-        #     print(f'Name: {item.name} - Price: {item.price}')
+    if search is not None and search != '':
+        searchPrice(room_types, search)
+        room_types = RoomType.objects.filter(price=int(search))
+        return render(request, 'manager/pages/room-type/all-room-type.html', {'room_types': room_types, 'search': search})
 
-        return render(request, 'manager/pages/room-type/all-room-type.html', { 'room_types': room_types })
-    return render(request, 'manager/pages/room-type/all-room-type.html', { 'room_types': room_types })
+    if sort is not None and sort == 'price':
+        room_types = sorted(room_types, key=lambda x: x.price)
+
+    return render(request, 'manager/pages/room-type/all-room-type.html', {'room_types': room_types})
+
+@login_required(login_url='login')
+@user_passes_test(lambda user: user.role == 'STAFF', login_url='home')
+def all_booking(request):
+    bookings = Booking.objects.all()
+    sort = request.GET.get('sort')
+
+    if sort is not None and sort == 'checkin_date':
+        bookings = bookings.order_by('checkin_date')
+
+    return render(request, 'manager/pages/booking/all-booking.html', {'bookings': bookings})
 
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.role == 'STAFF', login_url='home')
