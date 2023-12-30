@@ -15,7 +15,6 @@ urlpatterns = [
     path('services/delete/<int:id>', manager.deleteAService, name='delete-service'),
     path('customers/', manager.all_customers, name='all-customers'),
     path('booking/', manager.all_booking, name='all-booking'),
-    path('about/', manager.about, name='about'),
     path('staffs/register', registerStaff, name='staff-register'),
     path('', manager.dashboard, name='dashboard'),
 ]
