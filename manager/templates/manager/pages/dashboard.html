@@ -51,7 +51,13 @@
         <div class="col-9">
             <nav class="navbar navbar-expand-sm navbar-light bg-light">
                 <div class="container">
-                    <form action="/wp-admin/room-types/" class="d-flex my-2 my-lg-0">
+                    <form 
+                    {% if request.path == "/wp-admin/room-types/" %}
+                    action="/wp-admin/room-types/" 
+                    {% elif request.path == "/wp-admin/booking/" %}
+                    action="/wp-admin/booking/" 
+                    {% endif %}
+                    class="d-flex my-2 my-lg-0">
                         <input
                             class="form-control me-sm-2"
                             type="text"

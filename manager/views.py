@@ -4,9 +4,11 @@ from room.models import *
 from user.models import User
 from booking.models import Booking
 from django.contrib.auth.decorators import login_required, user_passes_test
-from helpers.linked_list import linked_list
-from helpers.search import searchForRoomType
-from helpers.tsort import timsort
+from helpers.linked_list import *
+from helpers.search import *
+from helpers.quick_sort import quick_sort_by_price
+from django.core.serializers import serialize
+import json
 # Create your views here.
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.role == 'STAFF', login_url='home')
@@ -19,61 +21,48 @@ def initialLinkedList(data, text):
     for data in room_types:
         new_linked_list.append(data)
     print(f'Before {text}')
-    for item in new_linked_list.display():
+    for item in new_linked_list.getAll():
         print(f'Name: {item.name} - Price: {item.price}')
-
-def searchPrice(room_types, search):
-    # push vào linklist 
-    newlinkedlist = linked_list()
-    # add data to the linked list 
-    for item in room_types:
-        newlinkedlist.append(item)
-    # search data return the array 
-    ArrRoom = searchForRoomType(linklist=newlinkedlist,price=int(search))
-    if  ArrRoom == "Not found":
-        print("Not found")
-    else : 
-        for item in ArrRoom:
-            print('Name: ' , item.name , " " , "Price: ",item.price ," ","Num_adults: ",item.num_adults," ","Num_children: ",item.num_children)
 
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.role == 'STAFF', login_url='home')
 def all_room_type(request):
-    room_types = RoomType.objects.all()
+    # Get data from database
+    data = RoomType.objects.all()
+
+    # Convert data to json
+    json_data = json.loads(serialize('json', data))
+    room_types = json_data
+
+    # Get parameter when search and sort
     search = request.GET.get('search')
     sort = request.GET.get('sort')
 
     if search is not None and search != '':
-        searchPrice(room_types, search)
-        room_types = RoomType.objects.filter(price=int(search))
+        room_types = searchPrice(room_types, search)
         return render(request, 'manager/pages/room-type/all-room-type.html', {'room_types': room_types, 'search': search})
 
     if sort is not None and sort == 'price':
-        room_types = sorted(room_types, key=lambda x: x.price)
+        sort_arr = quick_sort_by_price(json_data, 'price')
+        room_types = sort_arr
 
     return render(request, 'manager/pages/room-type/all-room-type.html', {'room_types': room_types})
 
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.role == 'STAFF', login_url='home')
-def all_booking(request):
-    bookings = Booking.objects.all()
-    sort = request.GET.get('sort')
-
-    if sort is not None and sort == 'checkin_date':
-        bookings = bookings.order_by('checkin_date')
-
-    return render(request, 'manager/pages/booking/all-booking.html', {'bookings': bookings})
-
-@login_required(login_url='login')
-@user_passes_test(lambda user: user.role == 'STAFF', login_url='home')
 def create_room_type(request):
+    # Initial Linked List
     new_linked_list = linked_list()
+
+    # Get data from db
     room_types = RoomType.objects.all()
+
+    # Append data to linked list
     for data in room_types:
         new_linked_list.append(data)
-    print("Before add new")
-    for item in new_linked_list.display():
-        print(f'Name: {item.name} - Price: {item.price}')
+    print("----------Before add new----------")
+    for item in new_linked_list.getAll():
+        print(f'Id: {item.id} - Name: {item.name} - Price: {item.price}')
     if request.method == 'POST':
         type = RoomType(
             name=request.POST['name'],
@@ -84,9 +73,9 @@ def create_room_type(request):
         )
         new_linked_list.append(type)
         type.save()
-        print("After add new")
-        for item in new_linked_list.display():
-            print(f'Name: {item.name} - Price: {item.price}')
+        print("----------After add new----------")
+        for item in new_linked_list.getAll():
+            print(f'Id: {item.id} - Name: {item.name} - Price: {item.price}')
         return redirect('all-room-type')
     else:
         form = RoomTypeForm()
@@ -101,9 +90,9 @@ def updateARoomType(request, id):
     new_linked_list = linked_list()
     for data in all_room_type:
         new_linked_list.append(data)
-    print("Before add new")
-    for item in new_linked_list.display():
-        print(f'Name: {item.name} - Price: {item.price} - Adults: {item.num_adults} - Children: {item.num_children}')
+    print("----------Before add new----------")
+    for item in new_linked_list.getAll():
+        print(f'Id: {item.id} - Name: {item.name} - Price: {item.price} - Adults: {item.num_adults} - Children: {item.num_children}')
     
     if request.method == 'POST':
         form = RoomTypeForm(request.POST)
@@ -115,12 +104,11 @@ def updateARoomType(request, id):
             room_type.num_adults = form.cleaned_data['numb_adults']
             room_type.num_children = form.cleaned_data['numb_children']
             new_linked_list.update_node(id, room_type)
-            # print(new_linked_list.get_node_at_index(id))
             room_type.save()
 
-            print("After update data:")
-            for item in new_linked_list.display():
-                print(f'Name: {item.name} - Price: {item.price} - Adults: {item.num_adults} - Children: {item.num_children}')
+            print("----------After update data----------")
+            for item in new_linked_list.getAll():
+                print(f'Id: {item.id} - Name: {item.name} - Price: {item.price} - Adults: {item.num_adults} - Children: {item.num_children}')
 
             return redirect('all-room-type')
     else:
@@ -142,15 +130,15 @@ def deleteARoomType(request, id):
     new_linked_list = linked_list()
     for data in all_room_type:
         new_linked_list.append(data)
-    print("Before delete")
-    for item in new_linked_list.display():
-        print(f'Name: {item.name} - Price: {item.price} - Adults: {item.num_adults} - Children: {item.num_children}')
+    print("----------Before delete----------")
+    for item in new_linked_list.getAll():
+        print(f'Id: {item.id} - Name: {item.name} - Price: {item.price} - Adults: {item.num_adults} - Children: {item.num_children}')
     if room_type:
         new_linked_list.delete_node_by_index(id)
         room_type.delete()
-        print("After delete")
-        for item in new_linked_list.display():
-            print(f'Name: {item.name} - Price: {item.price} - Adults: {item.num_adults} - Children: {item.num_children}')
+        print("----------After delete----------")
+        for item in new_linked_list.getAll():
+            print(f'Id: {item.id} - Name: {item.name} - Price: {item.price} - Adults: {item.num_adults} - Children: {item.num_children}')
         return redirect('all-room-type')
 
 @login_required(login_url='login')
@@ -227,8 +215,22 @@ def all_customers(request):
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.role == 'STAFF', login_url='home')
 def all_booking(request):
-    booking = Booking.objects.all()
-    return render(request, 'manager/pages/booking/all-booking.html', { 'bookings': booking })
+    data = Booking.objects.all()
+    json_data = json.loads(serialize('json', data))
+    bookings = json_data
+    
+    search = request.GET.get('search')
+    sort = request.GET.get('sort')
+
+    if search is not None and search != '':
+        bookings = searchTotalPrice(bookings, search)
+        return render(request, 'manager/pages/booking/all-booking.html', {'bookings': bookings, 'search': search})
+
+    if sort is not None and sort == 'total_price':
+        sort_arr = quick_sort_by_price(json_data, 'total_price')
+        bookings = sort_arr
+
+    return render(request, 'manager/pages/booking/all-booking.html', {'bookings': bookings})
 
 def about(request):
     return render(request, 'manager/pages/about.html')

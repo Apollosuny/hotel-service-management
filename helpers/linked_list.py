@@ -32,6 +32,14 @@ class linked_list:
             cur_node = cur_node.next
             elems.append(cur_node.data)
         return elems
+    
+    def getAll(self):
+        elems = []
+        cur_node = self.head
+        while cur_node.next != None:
+            cur_node = cur_node.next
+            elems.append(cur_node.data)
+        return elems
 
     # Returns the value of the node at 'index'.
     def get(self, index):
@@ -166,11 +174,4 @@ class linked_list:
             current = current.next
             current_index += 1
         return "Data not found!"
-
-default_data = [
-    { 'room_id': 1, 'room_number': '302', 'room_type': 'luxury', 'status': 'empty' },
-    { 'room_id': 2, 'room_number': '303', 'room_type': 'classic', 'status': 'full' },
-    { 'room_id': 3, 'room_number': '304', 'room_type': 'modern', 'status': 'full' },
-    { 'room_id': 4, 'room_number': '305', 'room_type': 'luxury', 'status': 'cleaned' },
-    { 'room_id': 5, 'room_number': '306', 'room_type': 'classic', 'status': 'empty' },
-]
+    

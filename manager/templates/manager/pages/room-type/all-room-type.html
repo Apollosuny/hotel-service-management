@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-6">
             <a href="{% url 'create-room-type' %}" type="button" class="btn btn-primary">Create</a>
-            <a href="/wp-admin/room-types/" type="button" class="btn btn-primary">Sort</a>
+            <a href="/wp-admin/room-types/?sort=price" type="button" class="btn btn-primary">Sort</a>
         </div>
     </div>
     <table class="table">
@@ -22,15 +22,15 @@
         <tbody>
             {% for room_type in room_types %}
             <tr>
-                <th scope="row">{{ room_type.id }}</th>
-                <td>{{ room_type.name }}</td>
-                <td>{{ room_type.description }}</td>
-                <td>{{ room_type.price }}</td>
-                <td>{{ room_type.num_adults }}</td>
-                <td>{{ room_type.num_children }}</td>
+                <th scope="row">{{ room_type.pk}}</th>
+                <td>{{ room_type.fields.name }}</td>
+                <td>{{ room_type.fields.description }}</td>
+                <td>{{ room_type.fields.price }}</td>
+                <td>{{ room_type.fields.num_adults }}</td>
+                <td>{{ room_type.fields.num_children }}</td>
                 <td>
-                    <a href="/wp-admin/room-types/{{ room_type.id }}" class="btn btn-info">Edit</a>
-                    <a href="/wp-admin/room-types/delete/{{ room_type.id }}" class="btn btn-danger">Delete</a>
+                    <a href="/wp-admin/room-types/{{ room_type.fields.id }}" class="btn btn-info">Edit</a>
+                    <a href="/wp-admin/room-types/delete/{{ room_type.fields.id }}" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
             {% endfor %}

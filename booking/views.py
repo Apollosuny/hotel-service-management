@@ -2,14 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from room.models import *
 from user.models import User, Customer
+from helpers.linked_list import *
+from helpers.search import *
 
 # Create your views here.
 def booking(request):
     if request.method == 'POST':
-        print(request.POST['checkin_date'])
-        print(request.POST['checkout_date'])
-        # print(request.POST['services'])
-        print(request.POST['room'])
         user = User.objects.get(pk=request.user.id)
         customer = Customer.objects.get(user=user)
         price = RoomType.objects.get(name=request.POST['room']).price

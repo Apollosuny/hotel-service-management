@@ -18,9 +18,6 @@ def all_rooms(request):
     adults = request.GET.get('adults', '')
     if adults == '':
         rooms = RoomType.objects.all()
-        for data in rooms:
-            ll.append(data)
-        ll.display()
 
         return render(request, 'room/rooms.html', { 'rooms': rooms, 'adults': adults })
     rooms = RoomType.objects.filter(num_adults=adults)
@@ -28,4 +25,5 @@ def all_rooms(request):
 
 def roomdetail(request, id):
     room = get_object_or_404(RoomType, pk=id)
-    return render(request,'room/roomdetail.html', { 'room': room })
+    services = Service.objects.all()
+    return render(request,'room/roomdetail.html', { 'room': room, 'services': services })
