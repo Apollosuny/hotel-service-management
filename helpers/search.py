@@ -4,16 +4,16 @@ def searchForRoomType(linklist,price=None):
         # Initialize current to head
         current = linklist.head.next
         # Loop till current not equal to None
-        ArrRoom = []
+        rooms = []
         while current != None:
             print(current.data)
             if (current.data['fields']['price'] == price or price == None):
-                ArrRoom.append(current.data)
+                rooms.append(current.data)
             current = current.next
-        if len(ArrRoom) == 0:
+        if len(rooms) == 0:
                 return "Not found"
         else : 
-                return ArrRoom
+                return rooms
 
 def searchPrice(room_types, search):
     # push vào linklist 
@@ -35,15 +35,15 @@ def totalPrice(linklist,price=None):
         # Initialize current to head
         current = linklist.head.next
         # Loop till current not equal to None
-        ArrRoom = []
+        data = []
         while current != None:
             if (current.data['fields']['total_price'] == price or price == None):
-                ArrRoom.append(current.data)
+                data.append(current.data)
             current = current.next
-        if len(ArrRoom) == 0:
+        if len(data) == 0:
                 return "Not found"
         else : 
-                return ArrRoom
+                return data
 
 def searchTotalPrice(room_types, search):
     # push vào linklist 
