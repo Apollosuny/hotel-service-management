@@ -34,8 +34,6 @@ def update_booking(request, id):
             if 'rooms' in request.POST:
                 for data in request.POST['rooms']:
                     selected_room.append(data)
-            # selected_room = Room.objects.get(pk = request.POST['rooms'])
-            # print(selected_room)
             print("Rooms: ", form.cleaned_data['rooms'])
             
 

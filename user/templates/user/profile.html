@@ -8,13 +8,25 @@
 {% endblock %}
 
 {% block content %}
-<main>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <div>
-            <button type="submit" class="btn btn-primary">Update</button>
+<main class="container">
+    <div class="row d-flex flex-column align-items-center gap-5 justify-content-center">
+        {% if message %}
+        <div class="col-6">
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
         </div>
-    </form>
+        {% endif %}
+        <div class="col-6">
+            <h3 class="text-center">Profile</h3>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </main>
 {% endblock %}

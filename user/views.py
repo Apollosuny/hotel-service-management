@@ -52,6 +52,7 @@ def logoutUser(request):
 
 @login_required(login_url='login')
 def profile(request):
+    message = ''
     user = get_object_or_404(Customer, user=request.user)
     if request.method == 'POST':
         form = ProfileForm(request.POST)
@@ -62,7 +63,7 @@ def profile(request):
             user.phone = form.cleaned_data['phone']
             user.national_id = form.cleaned_data['national_id']
             user.save()
-            return redirect('profile')
+            return render(request, 'user/profile.html', { 'form': form, 'message': 'Updated Profile successfully!!!' })
     else:
         form = ProfileForm(initial={ 'first_name': user.first_name, 'last_name': user.last_name, 'phone': user.phone, 'national_id': user.national_id })
     return render(request, 'user/profile.html', { 'form': form })
