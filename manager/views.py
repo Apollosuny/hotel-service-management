@@ -9,7 +9,7 @@ from helpers.search import *
 from helpers.quick_sort import quick_sort_by_price
 from django.core.serializers import serialize
 import json
-# Create your views here.
+
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.role == 'STAFF', login_url='home')
 def dashboard(request):
