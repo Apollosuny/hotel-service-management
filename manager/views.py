@@ -163,6 +163,22 @@ def create_room(request):
         return redirect('all-room')
     return render(request, 'manager/pages/rooms/room-create.html', { 'form': form })
 
+def update_room(request, id):
+    room = get_object_or_404(Room, pk=id)
+    if request.method == 'POST':
+        form = UpdateRoomForm(request.POST)
+        if form.is_valid():
+            # Update the instance with form data
+            room.room_number = form.cleaned_data['room_number']
+            room.room_type = form.cleaned_data['room_type']
+            room.status = form.cleaned_data['status']
+            room.save()
+            return redirect('all-room')
+    else:
+        form = UpdateRoomForm(initial={ 'room_number': room.room_number, 'room_type': room.room_type, 'status': room.status })
+
+    return render(request, 'room/update-room.html', { 'form': form })
+
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.role == 'STAFF', login_url='home')
 def create_service(request):

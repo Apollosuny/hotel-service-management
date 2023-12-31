@@ -16,6 +16,15 @@ class RoomForm(forms.Form):
         widget=forms.Select(attrs={'class': 'form-control'})
     )
 
+class UpdateRoomForm(forms.Form):
+    room_number = forms.CharField(label="Room number")
+    room_type = forms.ModelChoiceField(
+        queryset=RoomType.objects.all(), 
+        to_field_name='name', 
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    status = forms.CharField(label="Status")
+
 class ServiceForm(forms.Form):
     name = forms.CharField(label='Name Service', max_length=50)
     description = forms.CharField(label='Description', max_length=200)

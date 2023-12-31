@@ -1,12 +1,26 @@
 {% extends 'manager/pages/dashboard.html' %} 
+{% load static %}
 {% load crispy_forms_tags %} 
 {% block dashboard_section %}
 <main>
     <div class="container">
-        <h3>Update Service: </h3>
+        <div>
+            <a href="{% url 'all-booking' %}" class="btn btn-info">Back</a>
+        </div>
+        <h3>Update Booking: </h3>
         <form action="" method="POST">
             {% csrf_token %}
             {{ form|crispy }}
+
+            <div>
+                <h4>Booked room</h4>
+                {% for book in booked_room %}
+                <div>
+                    <input type="checkbox" disabled checked value="{{ book.id }}" >
+                    <span>{{ book.room_number }} - {{ book.room_type.name }}</span>
+                </div>
+                {% endfor %}
+            </div>
             <div>
                 <button type="submit" class="btn btn-primary">Create</button>
             </div>

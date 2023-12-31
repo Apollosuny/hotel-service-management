@@ -25,14 +25,14 @@ class Booking(models.Model):
     services = models.ManyToManyField(Service, null=True)
     rooms = models.ManyToManyField(Room, null=True)
 
-    def __str__(self):
-        return {
-            'customer': self.customer,
-            'checkin-date': self.checkin_date,
-            'checkout-date': self.checkout_date,
-            'services': self.services,
-            'total-price': self.total_price
-        }
+    # def __str__(self):
+    #     return {
+    #         'customer': self.customer,
+    #         'checkin-date': self.checkin_date,
+    #         'checkout-date': self.checkout_date,
+    #         'services': self.services,
+    #         'total-price': self.total_price
+    #     }
     
 class Payment(models.Model):
 

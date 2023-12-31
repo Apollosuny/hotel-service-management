@@ -18,7 +18,7 @@
                             CHECK-IN
                         </div>
                         <div class="check-in-date">
-                            <input type="date" name="checkin" />
+                            <input type="date" name="checkin" class="custom-input" />
                         </div>
                     </div>
                     <div class="separate"></div>
@@ -28,7 +28,7 @@
                             CHECK-OUT
                         </div>
                         <div class="check-in-date">
-                            <input type="date" name="checkout" />
+                            <input type="date" name="checkout" class="custom-input" />
                         </div>
                     </div>
                     <div class="separate"></div>
@@ -38,7 +38,7 @@
                             Adults
                         </div>
                         <div class="adults-date">
-                            <input type="number" name="adults" />
+                            <input type="number" name="adults" class="custom-input" />
                         </div>
                     </div>
                     <div class="separate"></div>
@@ -48,11 +48,11 @@
                             Children
                         </div>
                         <div class="children-date">
-                            <input type="number" name="children" />
+                            <input type="number" name="children" class="custom-input" />
                         </div>
                     </div>
                     <div>
-                        <button class="btn btn-primary">Search</button>
+                        <button class="btn btn-primary custom-btn">Search</button>
                     </div>
                 </div>
             </form>
@@ -76,35 +76,39 @@
                 </div>
             </div>
         </div>
-        <div class="services">
+        <div class="services mt-5">
             <h3 class="service-title">See our services</h3>
-            <p class="service-des">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+            <p class="service-des col-4">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
             <div class="row">
                 <div class="col-6">
-                    <div class="list-service">
-                        <div class="service-item">
-                            <div class="service-logo">
-                                <i class="fa-solid fa-utensils"></i>
+                    <div class="list-service d-flex flex-column justify-content-center gap-5">
+                        <div class="d-flex gap-5">
+                            <div class="service-item">
+                                <div class="service-logo">
+                                    <i class="fa-solid fa-utensils custom-logo"></i>
+                                </div>
+                                Quality Food
                             </div>
-                            Quality Food
+                            <div class="service-item">
+                                <div class="service-logo">
+                                    <i class="fa-solid fa-shield-halved custom-logo"></i>
+                                </div>
+                                High Security
+                            </div>
                         </div>
-                        <div class="service-item">
-                            <div class="service-logo">
-                                <i class="fa-solid fa-shield-halved"></i>
+                        <div class="d-flex gap-5">
+                            <div class="service-item">
+                                <div class="service-logo">
+                                    <i class="fa-solid fa-calendar-days custom-logo"></i>
+                                </div>
+                                Quick Service
                             </div>
-                            High Security
-                        </div>
-                        <div class="service-item">
-                            <div class="service-logo">
-                                <i class="fa-solid fa-calendar-days"></i>
+                            <div class="service-item">
+                                <div class="service-logo">
+                                    <i class="fa-regular fa-clock custom-logo"></i>
+                                </div>
+                                24 Hours Alert
                             </div>
-                            Quick Service
-                        </div>
-                        <div class="service-item">
-                            <div class="service-logo">
-                                <i class="fa-regular fa-clock"></i>
-                            </div>
-                            24 Hours Alert
                         </div>
                     </div>
                 </div>
@@ -115,19 +119,22 @@
                 </div>
             </div>
         </div>
-        <div class="rooms">
-            <h3 class="rooms-title">Choose best package</h3>
-            <p class="rooms-des">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that</p>
+        <div class="rooms mt-5 mb-5">
+            <h3 class="rooms-title text-center">Choose best package</h3>
+            <div class="d-flex justify-content-center mb-5">
+                <p class="rooms-des text-center col-6">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that</p>
+            </div>
             <div class="row">
+                {% for room in rooms %}
                 <div class="col-4">
                     <div class="wrapper-room">
                         <div class="wrapper-room-img">
                             <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
                         </div>
                         <div class="room-content text-center mt-4">
-                            <h4 class="room-type">Classic Room</h4>
+                            <h4 class="room-type">{{ room.name }}</h4>
                             <div class="room-price">
-                                $150 / <span>per night</span>
+                                ${{ room.price }} / <span>per night</span>
                             </div>
                             <div class="room-services d-flex flex-column gap-1 mb-3">
                                 <div class="room-service-item">free wifi</div>
@@ -136,55 +143,12 @@
                                 <div class="room-service-item">2 people in room</div>
                             </div>
                             <div class="room-btn">
-                                <button type="button" class="btn btn-primary">Select package</button>
+                                <a href="/rooms/{{ room.id }}" class="btn btn-primary">Select package</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class="wrapper-room">
-                        <div class="wrapper-room-img">
-                            <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
-                        </div>
-                        <div class="room-content text-center mt-4">
-                            <h4 class="room-type">Classic Room</h4>
-                            <div class="room-price">
-                                $150 / <span>per night</span>
-                            </div>
-                            <div class="room-services d-flex flex-column gap-1 mb-3">
-                                <div class="room-service-item">free wifi</div>
-                                <div class="room-service-item">breakfast</div>
-                                <div class="room-service-item">1 beds in room</div>
-                                <div class="room-service-item">2 people in room</div>
-                            </div>
-                            <div class="room-btn">
-                                <button type="button" class="btn btn-primary">Select package</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="wrapper-room">
-                        <div class="wrapper-room-img">
-                            <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
-                        </div>
-                        <div class="room-content text-center mt-4">
-                            <h4 class="room-type">Classic Room</h4>
-                            <div class="room-price">
-                                $150 / <span>per night</span>
-                            </div>
-                            <div class="room-services d-flex flex-column gap-1 mb-3">
-                                <div class="room-service-item">free wifi</div>
-                                <div class="room-service-item">breakfast</div>
-                                <div class="room-service-item">1 beds in room</div>
-                                <div class="room-service-item">2 people in room</div>
-                            </div>
-                            <div class="room-btn">
-                                <button type="button" class="btn btn-primary">Select package</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

@@ -11,25 +11,19 @@
         <div class="rooms_content">
             <ul class="nav justify-content-center">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page">DEFAULT</a>
+                    <a href="/rooms" class="nav-link active" aria-current="page">DEFAULT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">PRICE LOW TO HIGH</a>
+                    <a href="/rooms/?sort=asc" class="nav-link">PRICE LOW TO HIGH</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">PRICE HIGH TO LOW</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">NAME (A-Z)</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">NAME (Z-A)</a>
+                    <a href="/rooms/?sort=desc" class="nav-link">PRICE HIGH TO LOW</a>
                 </li>
             </ul>
             <div class="row" style="padding-top: 40px">
                 <div class="col-9 rooms_list row">
                     {% for room in rooms %}
-                    <a href="/rooms/{{ room.id }}" class="rooms_item col-6">
+                    <a href="/rooms/{{ room.pk }}" class="rooms_item col-6">
                         <div class="card">
                             <img
                                 src="https://albergo.qodeinteractive.com/wp-content/uploads/2017/11/List-3-feat-img-1-481x360.jpg"
@@ -37,8 +31,8 @@
                                 alt="..."
                             />
                             <div class="card-body">
-                                <h5 class="card-title">{{ room.name }}</h5>
-                                <p class="card-text">${{ room.price }}</p>
+                                <h5 class="card-title">{{ room.fields.name }}</h5>
+                                <p class="card-text">${{ room.fields.price }}</p>
                             </div>
                         </div>
                     </a>
@@ -56,25 +50,14 @@
                             <input type="date" class="form-control" />
                         </div>
                         <div class="mt-3">
-                            <label class="form-label">Room</label>
-                            <select
-                                class="form-select"
-                                aria-label="Default select example"
-                            >
-                                <option selected value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="mt-3">
                             <label class="form-label">Adults</label>
                             <select
                                 class="form-select"
                                 aria-label="Default select example"
                                 name="adults"
                             >
-                                <option {% if adults == '1' or not adults %} selected {% endif %} value="1">1</option>
+                                <option {% if not adults %} selected {% endif %} value="">Select the number of adults</option>
+                                <option {% if adults == '1' %} selected {% endif %} value="1">1</option>
                                 <option {% if adults == '2' %} selected {% endif %} value="2">2</option>
                                 <option {% if adults == '3' %} selected {% endif %} value="3">3</option>
                                 <option {% if adults == '4' %} selected {% endif %} value="4">4</option>
@@ -84,16 +67,30 @@
                         </div>
 
                         <div class="mt-3">
-                            <label for="customRange2" class="form-label"
-                                >0$-1000$</label
+                            <label class="form-label">Children</label>
+                            <select
+                                class="form-select"
+                                aria-label="Default select example"
+                                name="children"
                             >
-                            <input
-                                type="range"
-                                class="form-range"
-                                min="0"
-                                max="1000"
-                                id="customRange2"
-                            />
+                                <option {% if not children %} selected {% endif %} value="0">Select the number of children</option>
+                                <option {% if children == '1' %} selected {% endif %} value="1">1</option>
+                                <option {% if children == '2' %} selected {% endif %} value="2">2</option>
+                                <option {% if children == '3' %} selected {% endif %} value="3">3</option>
+                                <option {% if children == '4' %} selected {% endif %} value="4">4</option>
+                                <option {% if children == '5' %} selected {% endif %} value="5">5</option>
+                                <option {% if children == '6' %} selected {% endif %} value="6">6</option>
+                            </select>
+                        </div>
+
+                        <div class="mt-3">
+                            <label class="form-label">Min Price</label>
+                            <input type="number" name="min_price" class="form-control" value="{% if min_price %}{{ min_price }}{% else %}0{% endif %}" />
+                        </div>
+
+                        <div class="mt-3">
+                            <label class="form-label">Max Price</label>
+                            <input type="number" name="max_price" class="form-control" value="{% if min_price %}{{ max_price }}{% else %}10000{% endif %}" />
                         </div>
 
                         <div class="btn_rooms_filter_submit mt-3">

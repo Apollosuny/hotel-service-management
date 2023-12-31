@@ -1,7 +1,18 @@
 .separate {
     width: 2px;
-    height: 52px;
+    height: 60px;
     background-color: black;
+}
+
+.custom-input {
+    padding: 8px 12px;
+    margin-top: 6px;
+    border-radius: 10px;
+}
+
+.custom-btn {
+    width: 100px;
+    height: 50px;
 }
 
 /* Banner */
@@ -46,12 +57,14 @@
 
 }
 
+.rooms-title,
 .service-title {
     font-size: 48px;
 }
 
-.service-item {
-    
+.rooms-des,
+.service-des {
+    color: #828483;
 }
 
 .service-img {
@@ -65,9 +78,37 @@
     border-radius: 10px;
 }
 
+.list-service {
+    height: 100%;
+}
+
+.service-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.service-item > .service-logo {
+    width: 70px;
+    height: 70px;
+    padding: 20px;
+    border-radius: 50%;
+    background-color: beige;
+}
+
+.service-item > .service-logo > .custom-logo {
+    width: 30px;
+    height: 30px;
+}
+
 /* Rooms */
 .wrapper-room {
-
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+    padding: 0 0 40px;
 }
 
 .wrapper-room > .wrapper-room-img {

@@ -48,5 +48,5 @@ class Service(models.Model):
     status = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.name + ' - ' + str(self.price)
+        return self.name + ' - $' + str(self.price)
 

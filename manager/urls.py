@@ -9,6 +9,7 @@ urlpatterns = [
     path('room-types/', manager.all_room_type, name='all-room-type'),
     path('rooms/', manager.all_room, name='all-room'),
     path('rooms/create/', manager.create_room, name='create-room'),
+    path('rooms/update/<int:id>', manager.update_room, name='update-room'),
     path('services/', manager.allServices, name='services'),
     path('services/create/', manager.create_service, name='create-service'),
     path('services/<int:id>', manager.updateAService, name='update-service'),
