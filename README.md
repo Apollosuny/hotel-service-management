@@ -32,6 +32,11 @@ pip install -r requirements.txt
 python manage.py runserver
 ```
 
+Account for testing:
+Admin:
+- username: 'staff'
+- password: 'testing321.'
+
 ## Note
 - For create, update and delete a node in Linked List, you can check the result in terminal only. 
 - For sorting algorithm, we haven't sorted on the Linked List yet because some bug, using in normal array. 
