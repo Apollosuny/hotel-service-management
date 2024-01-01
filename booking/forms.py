@@ -14,7 +14,7 @@ class BookingForm(forms.Form):
     checkout_date = forms.DateField(label='Check-out')
     services = forms.ModelMultipleChoiceField(queryset=choices, widget=forms.CheckboxSelectMultiple, required=False)
     rooms = forms.ModelMultipleChoiceField(queryset=Room.objects.all(), widget=forms.CheckboxSelectMultiple, required = False)
-    total_price = forms.DecimalField(label='Room Price')
+    total_price = forms.DecimalField(label='Total Price')
     status = forms.CharField(
         widget=forms.Select(choices=Booking.PaymentStatus.choices),
     )
@@ -31,7 +31,6 @@ class BookingForm(forms.Form):
         
         if selected_services:
             selected_service_ids = [service.id for service in selected_services]
-            # Lọc ra các dịch vụ đã được chọn và loại bỏ chúng khỏi queryset
             all_services = Service.objects.exclude(id__in=selected_service_ids)
             self.fields['services'].queryset = all_services
             self.fields['services'].label_from_instance = lambda obj: obj.name

@@ -7,6 +7,7 @@ class RoomTypeForm(forms.Form):
     price = forms.DecimalField(label='Price')
     numb_adults = forms.IntegerField(label='Number of adults')
     numb_children = forms.IntegerField(label='Number of children')
+    banner = forms.CharField(label='Banner', required=False, max_length=200)
 
 class RoomForm(forms.Form):
     room_number = forms.CharField(label='Room Number')

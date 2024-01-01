@@ -24,7 +24,7 @@
                 {% for service in booked_service %}
                     <div>
                         <input type="checkbox" disabled checked value="{{ service.id }}" >
-                        <span>{{ service.name }} - {{ service.price }}</span>
+                        <span>{{ service.name }} - ${{ service.price }}</span>
                     </div>
                 {% endfor %}
             </div>

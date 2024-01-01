@@ -29,8 +29,8 @@
                 <td>{{ room_type.fields.num_adults }}</td>
                 <td>{{ room_type.fields.num_children }}</td>
                 <td>
-                    <a href="/wp-admin/room-types/{{ room_type.fields.id }}" class="btn btn-info">Edit</a>
-                    <a href="/wp-admin/room-types/delete/{{ room_type.fields.id }}" class="btn btn-danger">Delete</a>
+                    <a href="/wp-admin/room-types/{{ room_type.pk }}" class="btn btn-info">Edit</a>
+                    <a href="/wp-admin/room-types/delete/{{ room_type.pk }}" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
             {% endfor %}

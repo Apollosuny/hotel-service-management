@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{% static 'room/css/roomdetail.css' %}" />
 {% endblock %} {% block content %}
 
-<main class="main mb-5">
+<main class="main mb-5" style="background: url('{{ room.banner }}');">
     <div class="rooms_banner">
         <h1>Online Hotel Booking</h1>
     </div>
@@ -150,7 +150,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3 rooms_search" style="height: 750px">
+                <div class="col-3 rooms_search" style="height: 880px">
                     <form method="POST" action="/booking/">
                         {% csrf_token %}
                         <h4 style="text-align: center">Your Reservation</h4>
@@ -164,7 +164,7 @@
                         </div>
                         <div class="mt-3">
                             <label class="form-label">Room</label>
-                            <input type="text" value="{{ room.name }}" name="room" class="form-control" />
+                            <input type="text" value="{{ room.name }}" name="room" disabled class="form-control" />
                         </div>
                         <div class="mt-3">
                             <label class="form-label">Adults</label>
@@ -187,17 +187,16 @@
                             />
                         </div>
 
-                        <!-- <div class="mt-3">
+                        <div class="mt-3">
                             <label class="form-label">Services</label>
-                            <select name="service" class="form-select" aria-label="Default select example">
-                                <option selected value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                            </select>
-                        </div> -->
+                            {% for service in services %}
+                                <div>
+                                    <input type="checkbox" name="selected_services" value="{{ service.id }}" >
+                                    <span>{{ service.name }} - ${{ service.price }}</span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        
 
                         <div class="mt-4">
                             <label class="form-label">Price </label>

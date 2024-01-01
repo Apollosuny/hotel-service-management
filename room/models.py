@@ -12,6 +12,7 @@ class RoomType(models.Model):
     price = models.FloatField()
     num_adults = models.IntegerField()
     num_children = models.IntegerField()
+    banner = models.CharField(max_length=200, default='/room/images/room.jpg')
 
     def __str__(self):
         return self.name

@@ -103,6 +103,7 @@ def updateARoomType(request, id):
             room_type.price = form.cleaned_data['price']
             room_type.num_adults = form.cleaned_data['numb_adults']
             room_type.num_children = form.cleaned_data['numb_children']
+            room_type.banner = form.cleaned_data['banner']
             new_linked_list.update_node(id, room_type)
             room_type.save()
 
@@ -117,7 +118,8 @@ def updateARoomType(request, id):
             'description': room_type.description, 
             'price': room_type.price,
             'numb_adults': room_type.num_adults,
-            'numb_children': room_type.num_children
+            'numb_children': room_type.num_children,
+            'banner': room_type.banner,
         })
 
     return render(request, 'manager/pages/room-type/update-room-type.html', { 'form': form })

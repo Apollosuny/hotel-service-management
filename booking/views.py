@@ -12,6 +12,10 @@ def booking(request):
         user = User.objects.get(pk=request.user.id)
         customer = Customer.objects.get(user=user)
         price = RoomType.objects.get(name=request.POST['room']).price
+        if 'selected_services' in request.POST:
+            for data in request.POST.getlist('selected_services'):
+                service = Service.objects.get(pk=data)
+                price += service.price
         new_booking = Booking(
             checkin_date=request.POST['checkin_date'], 
             checkout_date=request.POST['checkout_date'], 
@@ -20,8 +24,9 @@ def booking(request):
             customer=customer
         )
         new_booking.save()
-        # new_booking.services.add(request.POST['services'])
-        # new_booking.rooms.add(request.POST['rooms'])
+        for data in request.POST.getlist('selected_services'):
+            service = Service.objects.get(pk=data)
+            new_booking.services.add(service)
         return redirect('/')
     
 def update_booking(request, id):

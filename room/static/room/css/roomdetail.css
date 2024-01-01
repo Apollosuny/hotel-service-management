@@ -1,8 +1,7 @@
 .main {
-    background: url('https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-    background-position: top;
-    background-size: 100% 560px;
-    background-repeat: no-repeat;
+    background-position: top !important; 
+    background-size: 100% 600px !important;
+    background-repeat: no-repeat !important;
 }
 
 .rooms_banner h1{
