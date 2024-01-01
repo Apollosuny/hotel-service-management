@@ -2,7 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %} 
 {% block dashboard_section %}
-<main>
+<main class="mb-5">
     <div class="container">
         <div>
             <a href="{% url 'all-booking' %}" class="btn btn-info">Back</a>
@@ -15,14 +15,21 @@
             <div>
                 <h4>Booked room</h4>
                 {% for book in booked_room %}
-                <div>
-                    <input type="checkbox" disabled checked value="{{ book.id }}" >
-                    <span>{{ book.room_number }} - {{ book.room_type.name }}</span>
-                </div>
+                    <div>
+                        <input type="checkbox" disabled checked value="{{ book.id }}" >
+                        <span>{{ book.room_number }} - {{ book.room_type.name }}</span>
+                    </div>
+                {% endfor %}
+                <h4>Booked service</h4>
+                {% for service in booked_service %}
+                    <div>
+                        <input type="checkbox" disabled checked value="{{ service.id }}" >
+                        <span>{{ service.name }} - {{ service.price }}</span>
+                    </div>
                 {% endfor %}
             </div>
-            <div>
-                <button type="submit" class="btn btn-primary">Create</button>
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary">Update Booking</button>
             </div>
         </form>
     </div>

@@ -6,14 +6,10 @@
 
 {% block content %}
 
-<div class="container">
+<div class="container mt-5">
     <div class="row">
         <div class="col-3">
             <div class="menu">
-                <div class="logo">
-                    <!-- <img src="" alt=""> -->
-                    <a href="/">Group 2</a>
-                </div>
                 <div class="menu-list d-flex flex-column gap-1">
                     <a href="{% url 'dashboard' %}" class="item {% if request.path == '/wp-admin/' %}item-active{% endif %}">
                         <i class="fa-solid fa-archway" style="margin-right: 10px;"></i>
@@ -57,7 +53,7 @@
                     {% elif request.path == "/wp-admin/booking/" %}
                     action="/wp-admin/booking/" 
                     {% endif %}
-                    class="d-flex my-2 my-lg-0">
+                    class="d-flex my-2 my-lg-0 rounded">
                         <input
                             class="form-control me-sm-2"
                             type="text"

@@ -4,6 +4,7 @@ from room.models import *
 from user.models import User, Customer
 from helpers.linked_list import *
 from helpers.search import *
+from decimal import Decimal
 
 # Create your views here.
 def booking(request):
@@ -26,6 +27,8 @@ def booking(request):
 def update_booking(request, id):
     booking = get_object_or_404(Booking, pk=id)
     booked_room = []
+    booked_service = []
+    booked_service_initial = []
     selected_room = []
     if request.method == 'POST':
         form = BookingForm(request.POST)
@@ -34,20 +37,25 @@ def update_booking(request, id):
             if 'rooms' in request.POST:
                 for data in request.POST['rooms']:
                     selected_room.append(data)
-            print("Rooms: ", form.cleaned_data['rooms'])
-            
 
             # Update the instance with form data
             booking.checkin_date = form.cleaned_data['checkin_date']
             booking.checkout_date = form.cleaned_data['checkout_date']
-            # booking.room_type = form.cleaned_data['rooms']
             booking.total_price = form.cleaned_data['total_price']
+            if 'services' in request.POST:
+                for data in request.POST.getlist('services'):
+                    service = Service.objects.get(pk=data)
+                    booked_service.append(service)
+                    booking.total_price += Decimal(service.price)
             booking.status = form.cleaned_data['status']
     
             booking.save()
             if selected_room is not None:
                 for data in selected_room:
                     booking.rooms.add(data)
+            if booked_service is not None:
+                for data in booked_service:
+                    booking.services.add(data)
 
             # Updata status room
             if booking.status == Booking.PaymentStatus.FULLY_PAID:
@@ -65,7 +73,7 @@ def update_booking(request, id):
             print(form.errors)
             return redirect('all-booking')
     else:
-        form = BookingForm(room_type = booking.room_type, initial={ 
+        form = BookingForm(room_type = booking.room_type, selected_services = booking.services.all(),  initial={ 
             'checkin_date': booking.checkin_date, 
             'checkout_date': booking.checkout_date, 
             'rooms': booking.room_type, 
@@ -73,6 +81,11 @@ def update_booking(request, id):
             'status': booking.status
         })
         booked_room = Booking.objects.get(pk=id).rooms.all()
+        booked_service_initial = Booking.objects.get(pk=id).services.all()
 
 
-    return render(request, 'booking/update-booking.html', { 'form': form, 'booked_room': booked_room })
+    return render(request, 'booking/update-booking.html', { 
+        'form': form, 
+        'booked_room': booked_room,
+        'booked_service': booked_service_initial,
+    })

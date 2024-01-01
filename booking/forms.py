@@ -20,6 +20,7 @@ class BookingForm(forms.Form):
     )
     def __init__(self, *args, **kwargs):
         room_type = kwargs.pop('room_type', None)
+        selected_services = kwargs.pop('selected_services', None)
         super(BookingForm, self).__init__(*args, **kwargs)
 
         if room_type:
@@ -27,4 +28,11 @@ class BookingForm(forms.Form):
             self.fields['rooms'].queryset = all_rooms
             self.fields['rooms'].label_from_instance = lambda obj: f"{obj.room_number} {obj.room_type.name} {obj.status}"
 
+        
+        if selected_services:
+            selected_service_ids = [service.id for service in selected_services]
+            # Lọc ra các dịch vụ đã được chọn và loại bỏ chúng khỏi queryset
+            all_services = Service.objects.exclude(id__in=selected_service_ids)
+            self.fields['services'].queryset = all_services
+            self.fields['services'].label_from_instance = lambda obj: obj.name
     

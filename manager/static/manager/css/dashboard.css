@@ -21,3 +21,18 @@
     padding: 8px 16px;
     border-radius: 6px;
 }
+
+.statistic-card {
+    padding: 16px;
+    border: 1px solid rgb(90, 89, 89);
+    border-radius: 10px;
+}
+
+.statistic-card > .statistic-icon > svg {
+    width: 30px;
+    height: 30px;
+}
+
+.statistic-card > .statistic-content > .statistic-number {
+    font-size: 24px;
+}

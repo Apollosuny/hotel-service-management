@@ -14,6 +14,8 @@ def home(request):
     rooms = RoomType.objects.all()[:3]
     if adults or children:
         rooms = RoomType.objects.filter(num_adults=adults, num_children=children)
+        json_data = json.loads(serialize('json', rooms))
+        rooms = json_data
         return render(request, 'room/rooms.html', { 'rooms': rooms, 'adults': adults, 'children': children })
     
     return render(request, 'room/home.html', { 'rooms': rooms })
