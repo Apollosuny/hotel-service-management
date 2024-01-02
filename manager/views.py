@@ -13,16 +13,17 @@ import json
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.role == 'STAFF', login_url='home')
 def dashboard(request):
-    return render(request, 'manager/components/dashboard-section.html')
-
-def initialLinkedList(data, text):
-    new_linked_list = linked_list()
-    room_types = RoomType.objects.all()
-    for data in room_types:
-        new_linked_list.append(data)
-    print(f'Before {text}')
-    for item in new_linked_list.getAll():
-        print(f'Name: {item.name} - Price: {item.price}')
+    revenue = 0
+    booking = Booking.objects.all().count()
+    customers = User.objects.filter(role="USER").count()
+    for data in Booking.objects.all():
+        revenue += data.total_price
+    context = {
+        'booking': booking,
+        'customers': customers,
+        'revenue': revenue
+    }
+    return render(request, 'manager/components/dashboard-section.html', context=context)
 
 @login_required(login_url='login')
 @user_passes_test(lambda user: user.role == 'STAFF', login_url='home')
@@ -63,6 +64,7 @@ def create_room_type(request):
     print("----------Before add new----------")
     for item in new_linked_list.getAll():
         print(f'Id: {item.id} - Name: {item.name} - Price: {item.price}')
+    print("----------------------------------")
     if request.method == 'POST':
         type = RoomType(
             name=request.POST['name'],
@@ -76,6 +78,7 @@ def create_room_type(request):
         print("----------After add new----------")
         for item in new_linked_list.getAll():
             print(f'Id: {item.id} - Name: {item.name} - Price: {item.price}')
+        print("---------------------------------")
         return redirect('all-room-type')
     else:
         form = RoomTypeForm()
@@ -93,7 +96,8 @@ def updateARoomType(request, id):
     print("----------Before add new----------")
     for item in new_linked_list.getAll():
         print(f'Id: {item.id} - Name: {item.name} - Price: {item.price} - Adults: {item.num_adults} - Children: {item.num_children}')
-    
+    print("----------------------------------")
+
     if request.method == 'POST':
         form = RoomTypeForm(request.POST)
         if form.is_valid():
@@ -110,7 +114,7 @@ def updateARoomType(request, id):
             print("----------After update data----------")
             for item in new_linked_list.getAll():
                 print(f'Id: {item.id} - Name: {item.name} - Price: {item.price} - Adults: {item.num_adults} - Children: {item.num_children}')
-
+            print("-------------------------------------")
             return redirect('all-room-type')
     else:
         form = RoomTypeForm(initial={ 
@@ -135,12 +139,14 @@ def deleteARoomType(request, id):
     print("----------Before delete----------")
     for item in new_linked_list.getAll():
         print(f'Id: {item.id} - Name: {item.name} - Price: {item.price} - Adults: {item.num_adults} - Children: {item.num_children}')
+    print("---------------------------------")
     if room_type:
         new_linked_list.delete_node_by_index(id)
         room_type.delete()
         print("----------After delete----------")
         for item in new_linked_list.getAll():
             print(f'Id: {item.id} - Name: {item.name} - Price: {item.price} - Adults: {item.num_adults} - Children: {item.num_children}')
+        print("--------------------------------")
         return redirect('all-room-type')
 
 @login_required(login_url='login')
