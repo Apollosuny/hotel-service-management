@@ -1,0 +1,56 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block css %} 
+    <link rel="stylesheet" href="{% static 'user/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="container">
+    <div class="row d-flex flex-column align-items-center gap-5 justify-content-center">
+        {% if message %}
+        <div class="col-6">
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        </div>
+        {% endif %}
+        <div class="col-6">
+            <h3 class="text-center mt-3">History Booking</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Check-in Date</th>
+                        <th scope="col">Check-out Date</th>
+                        <th scope="col">Total Price</th>
+                        <th scope="col">Room Type</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in bookings %}
+                        <tr>
+                            <td scope="col">{{ booking.id }}</td>
+                            <td scope="col">{{ booking.checkin_date }}</td>
+                            <td scope="col">{{ booking.checkout_date }}</td>
+                            <td scope="col">${{ booking.total_price }}</td>
+                            <td scope="col">{{ booking.room_type }}</td>
+                            <td scope="col">{{ booking.status }}</td>
+                            <!-- <td scope="col">
+                                <a href="/booking/{{ booking.id }}" class="btn btn-info">Edit</a>
+                                <a href="" class="btn btn-danger">Delete</a>
+                            </td> -->
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div>
+                <a href="/" class="btn btn-info">Back to home page</a>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

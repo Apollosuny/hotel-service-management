@@ -150,7 +150,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3 rooms_search" style="height: 880px">
+                <div class="col-3 rooms_search" style="height: 950px">
                     <form method="POST" action="/booking/">
                         {% csrf_token %}
                         <h4 style="text-align: center">Your Reservation</h4>
@@ -214,8 +214,8 @@
                         </div>
                         {% else %}
                         <div class="mt-5">
-                          Login to booking <br/>
-                          <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+                          <h3 class="">Login to booking</h3>
+                          <a href="{% url 'login' %}" class="btn btn-primary mt-3" style="width: 100%;">Login</a>
                         </div>
                         {% endif %}
                     </form>

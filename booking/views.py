@@ -94,3 +94,7 @@ def update_booking(request, id):
         'booked_room': booked_room,
         'booked_service': booked_service_initial,
     })
+
+def history_booking(request):
+    bookings = Booking.objects.filter(customer_id=request.user.id)
+    return render(request, 'booking/history_booking.html', { 'bookings': bookings })

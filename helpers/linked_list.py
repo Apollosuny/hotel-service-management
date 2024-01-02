@@ -1,5 +1,5 @@
 class node:
-    def __init__(self, data="haha"):
+    def __init__(self, data=""):
         self.data = data
         self.next = None
 
@@ -24,14 +24,13 @@ class linked_list:
             cur = cur.next
         return total
 
-    # Prints out the linked list in traditional Python list format.
-    # def display(self):
-    #     elems = []
-    #     cur_node = self.head
-    #     while cur_node.next != None:
-    #         cur_node = cur_node.next
-    #         elems.append(cur_node.data)
-    #     return elems
+    def display(self):
+        elems = []
+        cur_node = self.head
+        while cur_node.next != None:
+            cur_node = cur_node.next
+            elems.append(cur_node.data)
+        print(elems)
     
     def getAll(self):
         elems = []
@@ -52,7 +51,7 @@ class linked_list:
             current = current.next
             current_index += 1
 
-        return None  # Trả về None nếu chỉ mục không hợp lệ
+        return None 
 
     # Deletes the node at index 'index'.
     def delete_node_by_index(self, index):
