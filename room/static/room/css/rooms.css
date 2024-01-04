@@ -21,11 +21,32 @@
     background-color: #fff;
 }
 
+.rooms_content > ul {
+    background-color: black;
+    padding: 16px;
+    border-radius: 4px;
+}
+
+.rooms_content > ul > li:hover {
+    border-bottom: 2px solid white;
+    background-color: transparent;
+}
+
+.rooms_content > ul > .active {
+    border-bottom: 2px solid white;
+}
+
 .rooms_content ul li a {
-    color: black;
+    color: white;
     cursor: pointer;
     font-weight: 500;
 }
+
+.rooms_content > ul > li > a:hover {
+    color: white;
+    background-color: transparent;
+}
+
 .rooms_item{
     text-decoration: none;
     margin-bottom: 20px;

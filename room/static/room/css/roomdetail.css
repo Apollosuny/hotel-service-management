@@ -20,10 +20,17 @@
     background-color: #fff;
 }
 
-.rooms_content ul li a {
-    color: black;
+.rooms_content > ul {
+    background-color: black;
+    padding: 16px;
+    border-radius: 4px;
+}
+
+.rooms_content ul li {
+    color: white;
     cursor: pointer;
-    font-weight: 500;
+    font-size: 24px;
+    font-weight: 700;
 }
 .rooms_item{
     text-decoration: none;

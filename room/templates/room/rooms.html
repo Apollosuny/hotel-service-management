@@ -9,14 +9,14 @@
 
     <div class="container">
         <div class="rooms_content">
-            <ul class="nav justify-content-center">
-                <li class="nav-item">
-                    <a href="/rooms" class="nav-link active" aria-current="page">DEFAULT</a>
+            <ul class="nav gap-4 justify-content-center">
+                <li class="nav-item {% if request.path == '/rooms/' and not request.GET.sort %}active{% endif %}">
+                    <a href="/rooms" class="nav-link">DEFAULT</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {% if request.GET.sort == 'asc' %}active{% endif %}">
                     <a href="/rooms/?sort=asc" class="nav-link">PRICE LOW TO HIGH</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {% if request.GET.sort == 'desc' %}active{% endif %}">
                     <a href="/rooms/?sort=desc" class="nav-link">PRICE HIGH TO LOW</a>
                 </li>
             </ul>

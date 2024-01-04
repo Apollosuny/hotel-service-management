@@ -38,6 +38,7 @@ Admin:
 - password: 'testing321.'
 
 ## Note
+- All function initial algorithm like Linked List, Linear Search and Quick Sort will be in helpers folder.
 - For create, update and delete a node in Linked List, you can check the result in terminal only. 
 - For sorting algorithm, we haven't sorted on the Linked List yet because some bug, using in normal array. 
 

@@ -40,9 +40,14 @@ def all_rooms(request):
 
         return render(request, 'room/rooms.html', { 'rooms': rooms })
     
-
     rooms = RoomType.objects.filter(Q(price__range=(min_price, max_price)) & Q(num_adults=adults) & Q(num_children=children))
-    return render(request, 'room/rooms.html', { 'rooms': json.loads(serialize('json', rooms)), 'adults': adults, 'children': children, 'min_price': min_price, 'max_price': max_price })
+    return render(request, 'room/rooms.html', { 
+        'rooms': json.loads(serialize('json', rooms)), 
+        'adults': adults, 
+        'children': children, 
+        'min_price': min_price, 
+        'max_price': max_price,
+    })
 
 def roomdetail(request, id):
     room = get_object_or_404(RoomType, pk=id)

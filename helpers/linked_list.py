@@ -65,7 +65,7 @@ class linked_list:
                     previous.next = current.next
                 else:
                     self.head = current.next
-                return
+                return 
             previous = current
             current = current.next
             current_index += 1
@@ -107,4 +107,3 @@ class linked_list:
             current = current.next
             current_index += 1
         return "Data not found!"
-    
